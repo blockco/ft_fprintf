@@ -9,6 +9,8 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
+char *g_format = "sSpdDioOuUxXcC";
+
 void pf_putstr(va_list *ptr);
 void pf_putnbr(va_list *ptr);
 void pf_putchar(va_list *args);
@@ -29,6 +31,5 @@ void (*g_gl[14])(va_list *ptr) =
 	&pf_putchar, 	//12		c
 	&pf_putchar, 	//13		C
 };
-char *g_format = "sSpdDioOuUxXcC";
 				//012345678
 				#endif

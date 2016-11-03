@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/03 12:46:05 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/03 16:02:47 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void pf_putchar(va_list *args)
 	temp = (unsigned char)c;
 	ft_putchar(c);
 }
+
 
 
 void manageformat(char const *format, int *index, va_list *args)
@@ -107,5 +108,5 @@ int main()
 {
 	//ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
 	 //ft_printf("%s\n", "dicksssssss");
-	ft_printf("%d\n%s\n%c", 10, "hi there", 'c');
+	ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
 }
