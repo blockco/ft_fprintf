@@ -6,105 +6,32 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/03 21:18:09 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/03 21:36:54 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-/*
-libft wrapped
-	handling s, i, d, c,
+char *g_format = "sSpdDioOuUxXcC";
 
-*/
-
-void pf_putstr(va_list *args)
+void (*g_gl[14])(va_list *ptr) =
 {
-	char *str;
-	str = va_arg(*args,char*);
-	ft_putstr(str);
-}
-
-void pf_putnbr(va_list *args)
-{
-	int num;
-	num = va_arg(*args,int);
-	ft_putnbr(num);
-}
-
-void pf_putchar(va_list *args)
-{
-	int c;
-	unsigned char temp;
-	c = va_arg(*args,int);
-	temp = (unsigned char)c;
-	ft_putchar(c);
-}
-
-/*
-these need to be moved
-	handling x, o,
-
-*/
-
-int		ft_pow(int nb, int pow)
-{
-	if (pow == 0)
-		return (1);
-	else
-		return (nb * ft_pow(nb, pow - 1));
-}
-
-char	*ft_itoa_base(int value, int base)
-{
-	int		i;
-	char	*nbr;
-	int		neg;
-
-	i = 1;
-	neg = 0;
-	if (value < 0)
-	{
-		if (base == 10)
-			neg = 1;
-		value *= -1;
-	}
-	while (ft_pow(base, i) - 1 < value)
-		i++;
-	nbr = (char*)malloc(sizeof(nbr) * i);
-	nbr[i + neg] = '\0';
-	while (i-- > 0)
-	{
-		nbr[i + neg] = (value % base) + (value % base > 9 ? 'A' - 10 : '0');
-		value = value / base;
-	}
-	if (neg)
-		nbr[0] = '-';
-	return (nbr);
-}
-
-void pf_x_handle(va_list *args)
-{
-	int data;
-	char *str;
-	data = va_arg(*args,int);
-	str = ft_itoa_base(data,16);
-	ft_putstr(str);
-}
-
-void pf_o_handle(va_list *args)
-{
-	int data;
-	char *str;
-	data = va_arg(*args,int);
-	str = ft_itoa_base(data,8);
-	ft_putstr(str);
-}
-
-/*
-MOVE!!!!!!!!!!!!!
-*/
+	&pf_putstr, 	//0			s
+	&pf_putstr, 	//1 		S
+	NULL,			//2 		p
+	&pf_putnbr, 	//3			d
+	NULL, 			//4			D
+	&pf_putnbr, 	//5			i
+	&pf_o_handle, 	//6			o
+	NULL, 			//7			O
+	NULL, 			//8			u
+	NULL, 			//9			U
+	&pf_x_handle, 	//10		x
+	NULL, 			//11		X
+	&pf_putchar, 	//12		c
+	&pf_putchar, 	//13		C
+};
 
 void manageformat(char const *format, int *index, va_list *args)
 {
