@@ -14,4 +14,4 @@ void pf_putnbr(va_list *ptr);
 void pf_putchar(va_list *args);
 void pf_x_handle(va_list *args);
 void pf_o_handle(va_list *args);
-				#endif
+#endif
