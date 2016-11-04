@@ -6,12 +6,12 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/03 22:07:15 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/03 22:17:58 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+#include <stdio.h> //testing use
 
 char *g_format = "sSpdDioOuUxXcC";
 
