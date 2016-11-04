@@ -6,11 +6,18 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/03 16:02:47 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/03 20:58:40 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
+
+/*
+libft wrapped
+	handling s, i, d, c,
+
+*/
 
 void pf_putstr(va_list *args)
 {
@@ -35,7 +42,61 @@ void pf_putchar(va_list *args)
 	ft_putchar(c);
 }
 
+/*
+these need to be moved
+	handling x,
 
+*/
+
+int		ft_pow(int nb, int pow)
+{
+	if (pow == 0)
+		return (1);
+	else
+		return (nb * ft_pow(nb, pow - 1));
+}
+
+char	*ft_itoa_base(int value, int base)
+{
+	int		i;
+	char	*nbr;
+	int		neg;
+
+	i = 1;
+	neg = 0;
+	if (value < 0)
+	{
+		if (base == 10)
+			neg = 1;
+		value *= -1;
+	}
+	while (ft_pow(base, i) - 1 < value)
+		i++;
+	nbr = (char*)malloc(sizeof(nbr) * i);
+	nbr[i + neg] = '\0';
+	while (i-- > 0)
+	{
+		nbr[i + neg] = (value % base) + (value % base > 9 ? 'A' - 10 : '0');
+		value = value / base;
+	}
+	if (neg)
+		nbr[0] = '-';
+	return (nbr);
+}
+
+void pf_x_handle(va_list *args)
+{
+	int data;
+	char *str;
+	data = va_arg(*args,int);
+	str = ft_itoa_base(data,16);
+	ft_putstr(str);
+}
+
+
+/*
+MOVE!!!!!!!!!!!!!
+*/
 
 void manageformat(char const *format, int *index, va_list *args)
 {
@@ -56,7 +117,6 @@ void manageformat(char const *format, int *index, va_list *args)
 				if (g_format[i] == format[*index])
 				{
 					g_gl[i](args);
-					index++;
 					return ;
 				}
 				i++;
@@ -106,7 +166,12 @@ int ft_printf(const char *format, ...)
 
 int main()
 {
+	//void *ptr;
+
+	//ptr = "x";
 	//ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
 	 //ft_printf("%s\n", "dicksssssss");
-	ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
+	//ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
+	ft_printf("%x\n", 100);
+	printf("%x\n",100);
 }
