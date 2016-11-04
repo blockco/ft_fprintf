@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/03 20:58:40 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/03 21:18:09 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void pf_putchar(va_list *args)
 
 /*
 these need to be moved
-	handling x,
+	handling x, o,
 
 */
 
@@ -93,6 +93,14 @@ void pf_x_handle(va_list *args)
 	ft_putstr(str);
 }
 
+void pf_o_handle(va_list *args)
+{
+	int data;
+	char *str;
+	data = va_arg(*args,int);
+	str = ft_itoa_base(data,8);
+	ft_putstr(str);
+}
 
 /*
 MOVE!!!!!!!!!!!!!
@@ -172,6 +180,6 @@ int main()
 	//ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
 	 //ft_printf("%s\n", "dicksssssss");
 	//ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
-	ft_printf("%x\n", 100);
-	printf("%x\n",100);
+	ft_printf("%o\n", 100231);
+	printf("%o\n",100231);
 }
