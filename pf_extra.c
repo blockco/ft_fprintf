@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int		ft_pow(int nb, int pow)
+uintmax_t		ft_pow(uintmax_t nb, int pow)
 {
 	if (pow == 0)
 		return (1);
@@ -8,15 +8,16 @@ int		ft_pow(int nb, int pow)
 		return (nb * ft_pow(nb, pow - 1));
 }
 
-char	*ft_itoa_base(int value, int base)
+char	*ft_itoa_base(uintmax_t value, int base)
 {
 	int		i;
 	char	*nbr;
 	int		neg;
+	uintmax_t zero = 0;
 
 	i = 1;
 	neg = 0;
-	if (value < 0)
+	if (value < zero)
 	{
 		if (base == 10)
 			neg = 1;
@@ -35,15 +36,16 @@ char	*ft_itoa_base(int value, int base)
 		nbr[0] = '-';
 	return (nbr);
 }
-char	*ft_itoa_baselow(int value, int base)
+char	*ft_itoa_baselow(uintmax_t value, int base)
 {
 	int		i;
 	char	*nbr;
 	int		neg;
+	uintmax_t zero = 0;
 
 	i = 1;
 	neg = 0;
-	if (value < 0)
+	if (value < zero)
 	{
 		if (base == 10)
 			neg = 1;

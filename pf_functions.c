@@ -49,3 +49,25 @@ void pf_o_handle(va_list *args)
 	str = ft_itoa_base(data,8);
 	ft_putstr(str);
 }
+//O octo
+void pf_oup_handle(va_list *args)
+{
+	unsigned long int data;
+	char *str;
+	data = va_arg(*args,unsigned long int);
+	str = ft_itoa_base(data,8);
+	ft_putstr(str);
+}
+//p memory
+void pf_p_handle(va_list *args)
+{
+	uintmax_t data;
+	void *ptr;
+	char *str;
+	ptr = va_arg(*args,void*);
+	data = ((uintmax_t)ptr);
+	//ft_putnbr(data);
+	str = ft_itoa_baselow(data,16);
+	str = ft_strjoin("0x",str);
+	ft_putstr(str);
+}

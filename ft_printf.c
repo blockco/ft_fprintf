@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/05 20:11:12 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/05 20:51:39 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void (*g_gl[14])(va_list *ptr) =
 {
 	&pf_putstr, 	//0			s
 	&pf_putstr, 	//1 		S
-	NULL,			//2 		p
+	&pf_p_handle,	//2 		p
 	&pf_putnbr, 	//3			d
 	NULL, 			//4			D
 	&pf_putnbr, 	//5			i
 	&pf_o_handle, 	//6			o
-	NULL, 			//7			O
+	&pf_oup_handle, //7			O
 	NULL, 			//8			u
 	NULL, 			//9			U
-	&pf_xlow_handle,	//10		x
-	&pf_x_handle,			//11		X
+	&pf_xlow_handle,//10		x
+	&pf_x_handle,	//11		X
 	&pf_putchar, 	//12		c
 	&pf_putchar, 	//13		C
 };
@@ -101,12 +101,12 @@ int ft_printf(const char *format, ...)
 
 int main()
 {
-	//void *ptr;
+	void *ptr;
 
-	//ptr = "x";
+	ptr = "x";
 	//ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
 	 //ft_printf("%s\n", "dicksssssss");
 	//ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
-	ft_printf("%X\n", 1039731);
-	printf("%X\n",1039731);
+	ft_printf("%x\n", 1234567);
+	printf("%x\n",1234567);
 }

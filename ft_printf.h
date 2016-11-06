@@ -15,8 +15,10 @@ void 	pf_putchar(va_list *args);
 void 	pf_x_handle(va_list *args);
 void 	pf_xlow_handle(va_list *args);
 void 	pf_o_handle(va_list *args);
+void 	pf_oup_handle(va_list *args);
+void 	pf_p_handle(va_list *args);
 //extra functions
-int		ft_pow(int nb, int pow);
-char	*ft_itoa_base(int value, int base);
-char	*ft_itoa_baselow(int value, int base);
+uintmax_t		ft_pow(uintmax_t nb, int pow);
+char	*ft_itoa_base(uintmax_t value, int base);
+char	*ft_itoa_baselow(uintmax_t value, int base);
 #endif
