@@ -31,6 +31,15 @@ void pf_x_handle(va_list *args)
 	str = ft_itoa_base(data,16);
 	ft_putstr(str);
 }
+//x hex low
+void pf_xlow_handle(va_list *args)
+{
+	int data;
+	char *str;
+	data = va_arg(*args,int);
+	str = ft_itoa_baselow(data,16);
+	ft_putstr(str);
+}
 //o octo
 void pf_o_handle(va_list *args)
 {

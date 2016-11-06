@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 16:11:36 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/04 17:47:48 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/05 20:11:12 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void (*g_gl[14])(va_list *ptr) =
 	NULL, 			//7			O
 	NULL, 			//8			u
 	NULL, 			//9			U
-	&pf_x_handle, 	//10		x
-	NULL, 			//11		X
+	&pf_xlow_handle,	//10		x
+	&pf_x_handle,			//11		X
 	&pf_putchar, 	//12		c
 	&pf_putchar, 	//13		C
 };
@@ -107,6 +107,6 @@ int main()
 	//ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
 	 //ft_printf("%s\n", "dicksssssss");
 	//ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
-	ft_printf("%o\n", 100231);
-	printf("%o\n",100231);
+	ft_printf("%X\n", 1039731);
+	printf("%X\n",1039731);
 }
