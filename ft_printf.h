@@ -11,9 +11,16 @@ extern void (*g_gl[14])(va_list *ptr);
 
 typedef	struct s_flags
 {
-	void		*content;
-	size_t 		content_size;
-	struct		s_list *next;
+	int hh;
+	int h;
+	int l;
+	int	ll;
+	int j;
+	int z;
+	int hash;
+	int	zflag;
+	int	mflag;
+	int sign;
 }				s_flags;
 //pf wrappers
 void 	pf_putstr(va_list *ptr);
