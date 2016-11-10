@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/10 13:51:01 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/10 14:22:29 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void (*g_gl[14])(va_list *ptr) =
 	&pf_putchar, 	//13		C
 };
 
-void	setflags(s_flags **flag)
+void	setflags(s_flags **flag) //move
 {
 	s_flags *tempflag;
 	tempflag = *flag;
@@ -49,7 +49,7 @@ void	setflags(s_flags **flag)
 	tempflag->sign = 0;
 }
 
-void	setsymb(s_flags **flag, int *findex, const char *format)
+void	setsymb(s_flags **flag, int *findex, const char *format) //move
 {
 	int temp;
 	s_flags *tempflag;
@@ -72,21 +72,36 @@ void	setsymb(s_flags **flag, int *findex, const char *format)
 	*flag = tempflag;
 }
 
-
-
-int findfunind(char c)
+void	findflags(s_flags **flag, int *findex, const char *format) //move
 {
-	int i;
-
-	i = 0;
-	while (g_format[i])
+	int temp;
+	s_flags *tempflag;
+	tempflag = *flag;
+	temp = *findex;
+	if ((format[temp] == 'l' && format[temp + 1] == 'l') ||
+			(format[temp] == 'h' && format[temp + 1] == 'h'))
 	{
-		//printf("%i%c:%c\n",i, g_format[i], c);
-		if(g_format[i] == c)
-			return i;
-		i++;
+		if (format[temp] == 'l' && format[temp + 1] == 'l')
+			tempflag->ll = 1;
+		else if (format[temp] == 'h' && format[temp + 1] == 'h')
+			tempflag->hh = 1;
+		temp = temp + 2;
 	}
-	return -1;
+	else if (format[temp] == 'h' || format[temp] == 'l' ||
+			format[temp] == 'j' || format[temp] == 'z')
+	{
+		if (format[temp] == 'h')
+			tempflag->h = 1;
+		else if (format[temp] == 'l')
+			tempflag->l = 1;
+		else if (format[temp] == 'j')
+			tempflag->j = 1;
+		else if (format[temp] == 'z')
+			tempflag->z = 1;
+		temp++;
+	}
+	*findex = temp;
+	*flag = tempflag;
 }
 
 int findprecision(const char *format, int *findex)
@@ -112,16 +127,29 @@ int findprecision(const char *format, int *findex)
 	return i;
 }
 
+int findfunind(char c)
+{
+	int i;
+
+	i = 0;
+	while (g_format[i])
+	{
+		//printf("%i%c:%c\n",i, g_format[i], c);
+		if(g_format[i] == c)
+			return i;
+		i++;
+	}
+	return -1;
+}
+
+
 int ft_printf(const char *format, ...)
 {
-	int precision;
 	int findex;
-	int funind;
 	va_list args;
 	s_flags *flag;
 	flag = malloc(sizeof(s_flags));
 	setflags(&flag);
-	precision = 0;
 	findex = 0;
 	va_start(args,format);
 	while (format[findex])
@@ -133,54 +161,16 @@ int ft_printf(const char *format, ...)
 				|| format[findex] == '-' || format[findex] == '+')
 				setsymb(&flag,&findex,format);
 			if (format[findex] == '.')
-				precision = findprecision(format, &findex);
-			if (format[findex] == 'h' && format[findex + 1] == 'h')
-			{
-				flag->hh = 1;
-				findex = findex + 2;
-			}
-			else if (format[findex] == 'h')
-			{
-				flag->h = 1;
-				findex++;
-			}
-			else if (format[findex] == 'l')
-			{
-				flag->l = 1;
-				findex++;
-			}
-			else if (format[findex] == 'l' && format[findex + 1] == 'l')
-			{
-				flag->ll = 1;
-				findex = findex + 2;
-			}
-			else if (format[findex] == 'l')
-			{
-				flag->l = 1;
-				findex++;
-			}
-			else if (format[findex] == 'j')
-			{
-				flag->j = 1;
-				findex++;
-			}
-			else if (format[findex] == 'z')
-			{
-				flag->z = 1;
-				findex++;
-			}
-			funind = findfunind(format[findex]);
-			g_gl[funind](&args);
-			findex++;
+				flag->precision = findprecision(format, &findex);
+			findflags(&flag, &findex, format);
+			g_gl[findfunind(format[findex])](&args);
 		}
 		else
-		{
 			ft_putchar(format[findex]);
-			findex++;
-		}
+		findex++;
 	}
 	va_end(args);
-	return precision;
+	return flag->precision;
 }
 
 int main()
@@ -198,6 +188,6 @@ int main()
 	// const char* s = "Hello";
 	// printf("\t.%10s.\n\t.%-10s.\n\t.%*s.\n", s, s, 10, s);
 	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
-	i = ft_printf("%-+.51hhs\n", "sup fam");
+	i = ft_printf("fuck it%-+.51hhs\n", "sup fam");
 	//ft_printf("%i\n",i);
 }

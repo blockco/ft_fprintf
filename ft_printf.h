@@ -21,6 +21,7 @@ typedef	struct s_flags
 	int	zflag;
 	int	mflag;
 	int sign;
+	int precision;
 }				s_flags;
 //pf wrappers
 void 	pf_putstr(va_list *ptr);
@@ -31,6 +32,9 @@ void 	pf_xlow_handle(va_list *args);
 void 	pf_o_handle(va_list *args);
 void 	pf_oup_handle(va_list *args);
 void 	pf_p_handle(va_list *args);
+void	setflags(s_flags **flag);
+void	setsymb(s_flags **flag, int *findex, const char *format);
+void	findflags(s_flags **flag, int *findex, const char *format);
 //extra functions
 uintmax_t		ft_pow(uintmax_t nb, int pow);
 char	*ft_itoa_base(uintmax_t value, int base);
