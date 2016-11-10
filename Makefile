@@ -59,6 +59,7 @@ SRCS =	libft/ft_putchar.c \
 		ft_printf.c \
 		pf_extra.c \
 		pf_functions.c \
+		flags.c \
 
 OBJS =	$(NAME)
 

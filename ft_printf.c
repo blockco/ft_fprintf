@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/10 14:22:29 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/10 15:50:49 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,78 +33,7 @@ void (*g_gl[14])(va_list *ptr) =
 	&pf_putchar, 	//13		C
 };
 
-void	setflags(s_flags **flag) //move
-{
-	s_flags *tempflag;
-	tempflag = *flag;
-	tempflag->hh = 0;
-	tempflag->h = 0;
-	tempflag->l = 0;
-	tempflag->ll = 0;
-	tempflag->j = 0;
-	tempflag->z = 0;
-	tempflag->hash = 0;
-	tempflag->zflag = 0;
-	tempflag->mflag = 0;
-	tempflag->sign = 0;
-}
-
-void	setsymb(s_flags **flag, int *findex, const char *format) //move
-{
-	int temp;
-	s_flags *tempflag;
-	tempflag = *flag;
-	temp = *findex;
-	while (format[temp] == '#' || format[temp] == '0'
-		|| format[temp] == '-' || format[temp] == '+')
-	{
-		if (format[temp] == '#')
-			tempflag->hash = 1;
-		else if (format[temp] == '0')
-			tempflag->zflag = 1;
-		else if (format[temp] == '-')
-			tempflag->mflag = 1;
-		else if (format[temp] == '+')
-			tempflag->sign = 1;
-		temp++;
-	}
-	*findex = temp;
-	*flag = tempflag;
-}
-
-void	findflags(s_flags **flag, int *findex, const char *format) //move
-{
-	int temp;
-	s_flags *tempflag;
-	tempflag = *flag;
-	temp = *findex;
-	if ((format[temp] == 'l' && format[temp + 1] == 'l') ||
-			(format[temp] == 'h' && format[temp + 1] == 'h'))
-	{
-		if (format[temp] == 'l' && format[temp + 1] == 'l')
-			tempflag->ll = 1;
-		else if (format[temp] == 'h' && format[temp + 1] == 'h')
-			tempflag->hh = 1;
-		temp = temp + 2;
-	}
-	else if (format[temp] == 'h' || format[temp] == 'l' ||
-			format[temp] == 'j' || format[temp] == 'z')
-	{
-		if (format[temp] == 'h')
-			tempflag->h = 1;
-		else if (format[temp] == 'l')
-			tempflag->l = 1;
-		else if (format[temp] == 'j')
-			tempflag->j = 1;
-		else if (format[temp] == 'z')
-			tempflag->z = 1;
-		temp++;
-	}
-	*findex = temp;
-	*flag = tempflag;
-}
-
-int findprecision(const char *format, int *findex)
+int findprecision(const char *format, int *findex) //move
 {
 	int i = 0;
 	int temp;
