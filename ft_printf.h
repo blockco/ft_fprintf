@@ -8,6 +8,13 @@
 
 extern char *g_format;
 extern void (*g_gl[14])(va_list *ptr);
+
+typedef	struct s_flags
+{
+	void		*content;
+	size_t 		content_size;
+	struct		s_list *next;
+}				s_flags;
 //pf wrappers
 void 	pf_putstr(va_list *ptr);
 void 	pf_putnbr(va_list *ptr);

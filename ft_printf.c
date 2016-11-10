@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/09 22:34:29 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/09 23:23:35 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,6 @@ int findfunind(char c)
 	return -1;
 }
 
-void ft_strcjoin(char **str, char c)
-{
-	int i;
-	char *ret;
-	int size;
-
-	i = 0;
-	size = ft_strlen(*str);
-	ret = malloc(size + 2);
-	while (str[i])
-	{
-		//printf("%c\n",str[i]);
-		ret[i] = *str[i];
-		i++;
-	}
-	ret[i] = c;
-	ret[i + 1] = '\0';
-	str = &ret;
-}
-
-// char *getflags(char *format, int start)
-// {
-//
-// }
-
 int findprecision(const char *format, int *findex)
 {
 	int i = 0;
@@ -101,22 +76,23 @@ int ft_printf(const char *format, ...)
 {
 //declarations
 	int precision;
-	int sign;
 	int findex;
 	int funind;
-	int hh; //done
-	int h; //done
+	va_list args;
+//flags
+//move to struct
+	int hh;
+	int h;
 	int l;
 	int	ll;
 	int j;
 	int z;
-	char *numstr;
-	char *temp;
-	va_list args;
+	int hash;
+	int	zflag;
+	int	mflag;
+	int sign;
+//flags
 //initalizations
-	numstr = NULL;
-	temp = (char*)malloc(2);
-	temp[1] = '\0';
 	precision = 0;
 	findex = 0;
 	sign = 0;
@@ -127,10 +103,22 @@ int ft_printf(const char *format, ...)
 		if (format[findex] == '%')
 		{
 			findex++;
-			if (format[findex] == '+')
+			if (format[findex] == '#' || format[findex] == '0'
+				|| format[findex] == '-' || format[findex] == '+')
 			{
-				sign = 1;
-				findex++;
+				while (format[findex] == '#' || format[findex] == '0'
+					|| format[findex] == '-' || format[findex] == '+')
+				{
+					if (format[findex] == '#')
+						hash = 1;
+					else if (format[findex] == '0')
+						zflag = 1;
+					else if (format[findex] == '-')
+						mflag = 1;
+					else if (format[findex] == '+')
+						sign = 1;
+					findex++;
+				}
 			}
 			if (format[findex] == '.')
 				precision = findprecision(format, &findex);
@@ -192,11 +180,11 @@ int main()
 	//ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
 	 //ft_printf("%s\n", "dicksssssss");
 	//ft_printf("%i\n%s\n%c", 10, "hi there", 'c');
-	printf("%+hhd\n", (signed char)27);
+	printf("%hhd\n", (signed char)27);
 	// printf("Strings:\n");
 	// const char* s = "Hello";
 	// printf("\t.%10s.\n\t.%-10s.\n\t.%*s.\n", s, s, 10, s);
 	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
-	i = ft_printf("%+.51s\n", "sup fam");
-	ft_printf("%i",i);
+	i = ft_printf("%#-+.51s\n", "sup fam");
+	ft_printf("%i\n",i);
 }
