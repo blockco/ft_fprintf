@@ -66,7 +66,6 @@ void pf_p_handle(va_list *args)
 	char *str;
 	ptr = va_arg(*args,void*);
 	data = ((uintmax_t)ptr);
-	//ft_putnbr(data);
 	str = ft_itoa_baselow(data,16);
 	str = ft_strjoin("0x",str);
 	ft_putstr(str);
