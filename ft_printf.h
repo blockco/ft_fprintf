@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 07:31:09 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 10:10:10 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char			*ft_itoa_base(uintmax_t value, int base);
 char			*ft_itoa_baselow(uintmax_t value, int base);
 //flag handlers
 int checkzeroflag(s_flags **flag);
+int findprecision(const char *format, int *findex);
 //handle options
 int findprecision(const char *format, int *findex);
+char *flagformating(char *str, s_flags **flag, long long data);
 #endif

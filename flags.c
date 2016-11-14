@@ -17,31 +17,80 @@ void	setflags(s_flags **flag) //move
 	tempflag->space = 0;
 }
 
-void	setsymb(s_flags **flag, int *findex, const char *format) //move
+int findprecision(const char *format, int *findex)
+{
+	int i = 0;
+	int temp;
+
+	temp = *findex;
+	temp++;
+	while(format[temp] >= '0' && format[temp] <= '9')
+	{
+
+		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
+		{
+			i = i + format[temp] - 48;
+			i = i * 10;
+		}
+		else
+			i = i + format[temp] - 48;
+		temp++;
+	}
+	*findex = temp;
+	return i;
+}
+
+int findprecisionspace(const char *format, int *findex)
+{
+	int i = 0;
+	int temp;
+
+	temp = *findex;
+	temp++;
+	while(format[temp] >= '0' && format[temp] <= '9')
+	{
+
+		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
+		{
+			i = i + format[temp] - 48;
+			i = i * 10;
+		}
+		else
+			i = i + format[temp] - 48;
+		temp++;
+	}
+	*findex = temp;
+	if (i == 0)
+		return (1);
+	return i;
+}
+
+void	setsymb(s_flags **flag, int *findex, const char *format)
 {
 	int temp;
 	s_flags *tempflag;
 	tempflag = *flag;
 	temp = *findex;
 	while (format[temp] == '#' || format[temp] == '0'
-		|| format[temp] == '-' || format[temp] == '+')
+		|| format[temp] == '-' || format[temp] == '+'
+		|| format[temp] == ' ')
 	{
 		if (format[temp] == '#')
-			tempflag->hash = 1;
-		else if (format[temp] == '0')
-			tempflag->zflag = 1;
-		else if (format[temp] == '-')
 		{
-			tempflag->mflag = findprecision(format, &temp);
-			ft_putendl("\ngot to percision");
-			ft_putnbr(tempflag->mflag);
-			ft_putchar('\n');
+			tempflag->hash = 1;
+			temp++;
 		}
+		else if (format[temp] == '0')
+			tempflag->zflag = findprecision(format, &temp);
+		else if (format[temp] == '-')
+			tempflag->mflag = findprecision(format, &temp);
 		else if (format[temp] == '+')
+		{
 			tempflag->sign = 1;
+			temp++;
+		}
 		else if (format[temp] == ' ')
-				tempflag->space = 1;
-		temp++;
+				tempflag->space = findprecisionspace(format, &temp);
 	}
 	*findex = temp;
 	*flag = tempflag;
