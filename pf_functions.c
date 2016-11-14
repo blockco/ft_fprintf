@@ -20,144 +20,122 @@ void pf_putstr(va_list *args, s_flags **flag)
 //i,d
 void pf_putnbr(va_list *args, s_flags **flag)
 {
-	int num;
+	char *str;
+	ssize_t data;
+
 	s_flags *tempflag;
 	tempflag = *flag;
+	data = va_arg(*args,ssize_t);
 	if (checkzeroflag(&tempflag) == 1)
-		ft_putnbr(va_arg(*args,int));
+		str = ft_itoa_base((int)data,10);
 	else if (tempflag->z)
-		ft_putnbr(va_arg(*args,ssize_t));
+		str = ft_itoa_base(data,10);
 	else if (tempflag->j)
-		ft_putnbr(va_arg(*args,intmax_t));
+		str = ft_itoa_base((intmax_t)data,10);
 	else if (tempflag->ll)
-		ft_putnbr(va_arg(*args,long long));
+		str = ft_itoa_base((long long)data,10);
 	else if (tempflag->l)
-		ft_putnbr(va_arg(*args,long));
+		str = ft_itoa_base((long)data,10);
 	else if (tempflag->h)
-	{
-		num = va_arg(*args,int);
-		ft_putnbr((short)num);
-	}
+		str = ft_itoa_base((short)data,10);
 	else if (tempflag->hh)
-	{
-		num = va_arg(*args,int);
-		ft_putnbr((signed char)num);
-	}
+		str = ft_itoa_base((signed char)data,10);
+	ft_putstr(str);
 }
 //X hex
 void pf_x_handle(va_list *args, s_flags **flag)
 {
-	int data;
+	size_t data;
 	char *str;
 	s_flags *tempflag;
 	tempflag = *flag;
+	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
-		str = ft_itoa_base(va_arg(*args,unsigned int),16);
+		str = ft_itoa_base((unsigned int)data,16);
 	else if (tempflag->z)
-		str = ft_itoa_base(va_arg(*args,size_t),16);
+		str = ft_itoa_base(data,16);
 	else if (tempflag->j)
-		str = ft_itoa_base(va_arg(*args,uintmax_t),16);
+		str = ft_itoa_base((uintmax_t)data,16);
 	else if (tempflag->ll)
-		str = ft_itoa_base(va_arg(*args,unsigned long long),16);
+		str = ft_itoa_base((unsigned long long)data,16);
 	else if (tempflag->l)
-		str = ft_itoa_base(va_arg(*args,unsigned long),16);
+		str = ft_itoa_base((unsigned long)data,16);
 	else if (tempflag->h)
-	{
-		data = va_arg(*args,int);
 		str = ft_itoa_base((unsigned short)data,16);
-	}
 	else if (tempflag->hh)
-	{
-		data = va_arg(*args,int);
 		str = ft_itoa_base((unsigned char)data,16);
-	}
 	ft_putstr(str);
 }
 //x hex low
 void pf_xlow_handle(va_list *args, s_flags **flag)
 {
-	int data;
+	size_t data;
 	char *str;
 	s_flags *tempflag;
 	tempflag = *flag;
+	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
-		str = ft_itoa_baselow(va_arg(*args,unsigned int),16);
+		str = ft_itoa_baselow((unsigned int)data,16);
 	else if (tempflag->z)
-		str = ft_itoa_baselow(va_arg(*args,size_t),16);
+		str = ft_itoa_baselow(data,16);
 	else if (tempflag->j)
-		str = ft_itoa_baselow(va_arg(*args,uintmax_t),16);
+		str = ft_itoa_baselow((uintmax_t)data,16);
 	else if (tempflag->ll)
-		str = ft_itoa_baselow(va_arg(*args,unsigned long long),16);
+		str = ft_itoa_baselow((unsigned long long)data,16);
 	else if (tempflag->l)
-		str = ft_itoa_baselow(va_arg(*args,unsigned long),16);
+		str = ft_itoa_baselow((unsigned long)data,16);
 	else if (tempflag->h)
-	{
-		data = va_arg(*args,int);
 		str = ft_itoa_baselow((unsigned short)data,16);
-	}
 	else if (tempflag->hh)
-	{
-		data = va_arg(*args,int);
 		str = ft_itoa_baselow((unsigned char)data,16);
-	}
 	ft_putstr(str);
 }
 //o octo
 void pf_o_handle(va_list *args, s_flags **flag)
 {
-	int data;
+	size_t data;
 	char *str;
 	s_flags *tempflag;
 	tempflag = *flag;
+	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
-		str = ft_itoa_baselow(va_arg(*args,unsigned int),8);
+		str = ft_itoa_baselow((unsigned int)data,8);
 	else if (tempflag->z)
-		str = ft_itoa_baselow(va_arg(*args,size_t),8);
+		str = ft_itoa_baselow(data,8);
 	else if (tempflag->j)
-		str = ft_itoa_baselow(va_arg(*args,uintmax_t),8);
+		str = ft_itoa_baselow((uintmax_t)data,8);
 	else if (tempflag->ll)
-		str = ft_itoa_baselow(va_arg(*args,unsigned long long),8);
+		str = ft_itoa_baselow((unsigned long long)data,8);
 	else if (tempflag->l)
-		str = ft_itoa_baselow(va_arg(*args,unsigned long),8);
+		str = ft_itoa_baselow((unsigned long)data,8);
 	else if (tempflag->h)
-	{
-		data = va_arg(*args,int);
 		str = ft_itoa_baselow((unsigned short)data,8);
-	}
 	else if (tempflag->hh)
-	{
-		data = va_arg(*args,int);
 		str = ft_itoa_baselow((unsigned char)data,8);
-	}
 	ft_putstr(str);
 }
 //O octo
 void pf_oup_handle(va_list *args, s_flags **flag)
 {
-	int data;
+	size_t data;
 	char *str;
 	s_flags *tempflag;
 	tempflag = *flag;
+	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
-		str = ft_itoa_base(va_arg(*args,unsigned int),8);
+		str = ft_itoa_baselow((unsigned int)data,8);
 	else if (tempflag->z)
-		str = ft_itoa_base(va_arg(*args,size_t),8);
+		str = ft_itoa_baselow(data,8);
 	else if (tempflag->j)
-		str = ft_itoa_base(va_arg(*args,uintmax_t),8);
+		str = ft_itoa_baselow((uintmax_t)data,8);
 	else if (tempflag->ll)
-		str = ft_itoa_base(va_arg(*args,unsigned long long),8);
+		str = ft_itoa_baselow((unsigned long long)data,8);
 	else if (tempflag->l)
-		str = ft_itoa_base(va_arg(*args,unsigned long),8);
+		str = ft_itoa_baselow((unsigned long)data,8);
 	else if (tempflag->h)
-	{
-		data = va_arg(*args,int);
-		str = ft_itoa_base((unsigned short)data,8);
-	}
+		str = ft_itoa_baselow((unsigned short)data,8);
 	else if (tempflag->hh)
-	{
-		data = va_arg(*args,int);
-		str = ft_itoa_base((unsigned char)data,8);
-	}
+		str = ft_itoa_baselow((unsigned char)data,8);
 	ft_putstr(str);
 }
 //p memory
