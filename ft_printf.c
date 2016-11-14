@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 13:07:06 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 13:15:30 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int findfunind(char c)
 	i = 0;
 	while (g_format[i])
 	{
-		//printf("%i%c:%c\n",i, g_format[i], c);
 		if(g_format[i] == c)
 			return i;
 		i++;
@@ -66,10 +65,6 @@ int ft_printf(const char *format, ...)
 				|| format[findex] == '-' || format[findex] == '+' ||
 				format[findex] == ' ')
 				setsymb(&flag,&findex,format);
-			ft_putchar('\n');
-			ft_putchar(format[findex]);
-			ft_putchar('\n');
-			ft_putnbr(flag->mflag);
 			if (format[findex] == '.')
 				flag->precision = findprecision(format, &findex);
 			findflags(&flag, &findex, format);

@@ -42,7 +42,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 		str = ft_itoa_base((signed char)data,10);
 	else
 		str = NULL;
-	//str = flagformating(str, &tempflag, (long long)data);
+	str = flagformating(str, &tempflag, (long long)data);
 	ft_putstr(str);
 }
 //X hex

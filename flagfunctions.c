@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 10:15:44 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 13:17:40 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char *flagformating(char *str, s_flags **flag, long long data)
 			{
 				if (data < 0)
 					ft_strjoin("-",str);
-				ft_putendl("got here");
 			}
 			temp = ft_memalloc(tempflag->space);
 			ft_memset(temp,' ', tempflag->space);
