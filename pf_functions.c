@@ -1,4 +1,13 @@
 #include "ft_printf.h"
+//c
+void pf_putchar(va_list *args)
+{
+	int c;
+	unsigned char temp;
+	c = va_arg(*args,int);
+	temp = (unsigned char)c;
+	ft_putchar(c);
+}
 //s
 void pf_putstr(va_list *args)
 {
@@ -12,15 +21,6 @@ void pf_putnbr(va_list *args)
 	int num;
 	num = va_arg(*args,int);
 	ft_putnbr(num);
-}
-//c
-void pf_putchar(va_list *args)
-{
-	int c;
-	unsigned char temp;
-	c = va_arg(*args,int);
-	temp = (unsigned char)c;
-	ft_putchar(c);
 }
 //x hex
 void pf_x_handle(va_list *args)

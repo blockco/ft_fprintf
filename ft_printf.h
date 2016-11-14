@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/10 15:30:03 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 00:50:59 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,17 @@ extern void (*g_gl[14])(va_list *ptr);
 
 typedef	struct s_flags
 {
-	int hh;
-	int h;
-	int l;
-	int	ll;
+	int z;// biggest to smallest
 	int j;
-	int z;
+	int	ll;
+	int l;
+	int h;
+	int hh;
 	int hash;
 	int	zflag;
 	int	mflag;
 	int sign;
+	int space;
 	int precision;
 }				s_flags;
 //pf wrappers

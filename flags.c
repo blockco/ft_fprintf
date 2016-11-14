@@ -14,6 +14,7 @@ void	setflags(s_flags **flag) //move
 	tempflag->zflag = 0;
 	tempflag->mflag = 0;
 	tempflag->sign = 0;
+	tempflag->space = 0;
 }
 
 void	setsymb(s_flags **flag, int *findex, const char *format) //move
@@ -33,6 +34,8 @@ void	setsymb(s_flags **flag, int *findex, const char *format) //move
 			tempflag->mflag = 1;
 		else if (format[temp] == '+')
 			tempflag->sign = 1;
+		else if (format[temp] == ' ')
+				tempflag->space = 1;
 		temp++;
 	}
 	*findex = temp;
