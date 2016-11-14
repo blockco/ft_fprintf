@@ -31,7 +31,12 @@ void	setsymb(s_flags **flag, int *findex, const char *format) //move
 		else if (format[temp] == '0')
 			tempflag->zflag = 1;
 		else if (format[temp] == '-')
-			tempflag->mflag = 1;
+		{
+			tempflag->mflag = findprecision(format, &temp);
+			ft_putendl("\ngot to percision");
+			ft_putnbr(tempflag->mflag);
+			ft_putchar('\n');
+		}
 		else if (format[temp] == '+')
 			tempflag->sign = 1;
 		else if (format[temp] == ' ')

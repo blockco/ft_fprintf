@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 02:50:07 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 06:12:19 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,10 @@ int checkzeroflag(s_flags **flag)
 		return 1;
 	return 0;
 }
+
+// void flagformating(s_flags **flag)
+// {
+// 	s_flags *tempflag;
+// 	tempflag = *flag;
+//
+// }

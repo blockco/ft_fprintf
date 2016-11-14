@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 04:55:06 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 06:14:07 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int findfunind(char c)
 	return -1;
 }
 
-
 int ft_printf(const char *format, ...)
 {
 	int findex;
@@ -89,17 +88,19 @@ int ft_printf(const char *format, ...)
 			if (format[findex] == '#' || format[findex] == '0'
 				|| format[findex] == '-' || format[findex] == '+')
 				setsymb(&flag,&findex,format);
+			ft_putnbr(flag->mflag);
 			if (format[findex] == '.')
 				flag->precision = findprecision(format, &findex);
 			findflags(&flag, &findex, format);
 			g_gl[findfunind(format[findex])](&args,&flag);
+			//flagformating(&flag); //flag handling
 		}
 		else
 			ft_putchar(format[findex]);
 		findex++;
 	}
 	va_end(args);
-	return flag->precision;
+	return flag->mflag;
 }
 
 int main()
@@ -107,7 +108,7 @@ int main()
 	void *ptr;
 	size_t size;
 	size = 10;
-	//int i;
+	int i;
 	//unsigned long l = 12356.613489;
 
 	ptr = "x";
@@ -121,8 +122,9 @@ int main()
 	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
 	//i = ft_printf("fuck it%-+.51hhs\n", "sup fam");
 	//ft_printf("fuck it%hhd\n", 12341);
-	ft_printf("fuck it%zo\n", (ssize_t)1923);
-	printf("%-20sqwer\n", "asdf");
+	i = ft_printf("fuck it%-20zo\n", (ssize_t)1923);
+	printf("%d\n",i);
+	printf("%.3dqwer\n", 20);
 	//ft_putnbr(size);
 	//ft_printf("%i\n",i);
 }

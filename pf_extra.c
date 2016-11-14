@@ -64,3 +64,16 @@ char	*ft_itoa_baselow(uintmax_t value, int base)
 		nbr[0] = '-';
 	return (nbr);
 }
+
+int findsize(int value, int base)
+{
+	int size;
+
+	size = 0;
+	while (value)
+	{
+		size++;
+		value = value / base;
+	}
+	return size;
+}
