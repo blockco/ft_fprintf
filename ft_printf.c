@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 03:17:24 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 04:55:06 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void (*g_gl[14])(va_list *ptr, s_flags **flag) =
 	&pf_putstr, 	//1 		S
 	&pf_p_handle,	//2 		p
 	&pf_putnbr, 	//3			d
-	NULL, 			//4			D
+	&pf_putnbr, 	//4			D
 	&pf_putnbr, 	//5			i
 	&pf_o_handle, 	//6			o
 	&pf_oup_handle, //7			O
@@ -121,7 +121,8 @@ int main()
 	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
 	//i = ft_printf("fuck it%-+.51hhs\n", "sup fam");
 	//ft_printf("fuck it%hhd\n", 12341);
-	ft_printf("fuck it%hhd\n", 'a');
+	ft_printf("fuck it%zo\n", (ssize_t)1923);
+	printf("%-20sqwer\n", "asdf");
 	//ft_putnbr(size);
 	//ft_printf("%i\n",i);
 }
