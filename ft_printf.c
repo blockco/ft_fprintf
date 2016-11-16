@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 16:55:30 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/16 00:36:30 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,32 +77,4 @@ int ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return flag->mflag;
-}
-
-int main()
-{
-	void *ptr;
-	size_t size;
-	size = 10;
-	int i;
-	//unsigned long l = 12356.613489;
-
-	ptr = "x";
-	// ft_printf("%s\n%s\n\n%s%s\n","one", "two", "three", "four");
-	// ft_printf("%s\n", "dicksssssss");
-	// ft_printf("%i\n%s\n%c\n", 10, "hi there", 'c');
-	//printf("%hhd\n", (signed char)27);
-	//printf("Strings:\n");
-	// const char* s = "Hello";
-	// printf("\t.%10s.\n\t.%-10s.\n\t.%*s.\n", s, s, 10, s);
-	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
-	//i = ft_printf("fuck it%-+.51hhs\n", "sup fam");
-	//ft_printf("fuck it%hhd\n", 12341);
-	i = ft_printf("fuck it% 3d\n",-1923);
-	printf("% d\n",1923);
-	//printf("%d\n",i);
-	//printf("%+15dqwer\n", -20);
-	//ft_putnbr(size);
-	//ft_printf("%i\n",i);
-	//ft_printf("%s\n", ft_itoa_base(-1923,10));
 }

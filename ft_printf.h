@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 15:57:25 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/16 00:42:21 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ int findprecision(const char *format, int *findex);
 //handle options
 int findprecision(const char *format, int *findex);
 char *flagformating(char *str, s_flags **flag, long long data);
+//printf
+int ft_printf(const char *format, ...);
 #endif
