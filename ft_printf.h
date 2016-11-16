@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 10:10:10 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 15:57:25 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	findflags(s_flags **flag, int *findex, const char *format);
 int findsize(int value, int base);
 //handle
 uintmax_t		ft_pow(uintmax_t nb, int pow);
-char			*ft_itoa_base(uintmax_t value, int base);
-char			*ft_itoa_baselow(uintmax_t value, int base);
+char *ft_itoa_base(int value, int base);
+char *ft_itoa_baselow(int value, int base);
 //flag handlers
 int checkzeroflag(s_flags **flag);
 int findprecision(const char *format, int *findex);

@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 13:15:30 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/14 16:55:30 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,11 @@ int main()
 	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
 	//i = ft_printf("fuck it%-+.51hhs\n", "sup fam");
 	//ft_printf("fuck it%hhd\n", 12341);
-	i = ft_printf("fuck it% 20d\n", (ssize_t)1923);
+	i = ft_printf("fuck it% 3d\n",-1923);
+	printf("% d\n",1923);
 	//printf("%d\n",i);
 	//printf("%+15dqwer\n", -20);
 	//ft_putnbr(size);
 	//ft_printf("%i\n",i);
+	//ft_printf("%s\n", ft_itoa_base(-1923,10));
 }

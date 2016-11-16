@@ -6,11 +6,14 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/14 13:17:40 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/16 00:25:45 by rpassafa         ###   ########.us       */
+/*                                                                            */
+/* ************************************************************************** */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 
 int checkzeroflag(s_flags **flag)
 {
@@ -23,32 +26,74 @@ int checkzeroflag(s_flags **flag)
 	return 0;
 }
 
+char *ft_stradd(char* append, char *str)
+{
+	char *ret;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	ret = ft_strnew(ft_strlen(append) + ft_strlen(str));
+	while (ret[i])
+	{
+		while (append[j])
+		{
+			ret[i] = append[j];
+			i++;
+			j++;
+		}
+		j = 0;
+		while (str[j])
+		{
+			ret[i] = str[j];
+			i++;
+			j++;
+		}
+	}
+	return (ret);
+}
+
+char	*makespace(int size, int c)
+{
+	char *ret;
+	int i;
+
+	i = 0;
+	ret = (char*)malloc(size+1);
+	ret[size] = '\0';
+	ret = (char*)ft_memset(ret,c,size);
+	return (ret);
+}
+
 char *flagformating(char *str, s_flags **flag, long long data)
 {
-	char *key;
 	char *temp;
-	key = "-+";
+	char *test;
 	s_flags *tempflag;
 	tempflag = *flag;
-	if (tempflag->sign || tempflag->space)
-	{
-		if (tempflag->sign)
-		{
-			if (data < 0)
-				ft_strjoin("-",str);
-			else if (data > 0)
-				ft_strjoin("+", str);
-		}
-		else if (tempflag->space)
-			{
-				if (data < 0)
-					ft_strjoin("-",str);
-			}
-			temp = ft_memalloc(tempflag->space);
-			ft_memset(temp,' ', tempflag->space);
-			ft_strjoin(temp, str);
-	}
-	else
-		temp = NULL;
-	return str;
+	test = makespace(tempflag->space, ' ');
+	temp = ft_strnew(ft_strlen(str) + tempflag->space);
+	temp = ft_strjoin(test,str);
+	data = 0;
+	return temp;
 }
+
+// char *flagformating(char *str, s_flags **flag, long long data)
+// {
+// 	char *temp;
+// 	char *test;
+// 	s_flags *tempflag;
+// 	tempflag = *flag;
+//
+// 	if (tempflag->space || tempflag->sign)
+// 	{
+// 		if (tempflag->sign)
+// 			tempflag->sign =
+// 	}
+// 	test = makespace(tempflag->space, ' ');
+// 	temp = ft_strnew(ft_strlen(str) + tempflag->space);
+// 	temp = ft_strjoin(test,str);
+// 	data = 0;
+// 	return temp;
+// }

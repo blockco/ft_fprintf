@@ -60,8 +60,6 @@ int findprecisionspace(const char *format, int *findex)
 		temp++;
 	}
 	*findex = temp;
-	if (i == 0)
-		return (1);
 	return i;
 }
 
