@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/16 00:42:21 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/16 05:14:29 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	struct s_flags
 	int sign;
 	int space;
 	int precision;
+	int isnegative;
 }				s_flags;
 
 extern char *g_format;
@@ -50,6 +51,7 @@ void	setsymb(s_flags **flag, int *findex, const char *format);
 void	findflags(s_flags **flag, int *findex, const char *format);
 //extra functions
 int findsize(int value, int base);
+char *betterjoin(char *first, char *second);
 //handle
 uintmax_t		ft_pow(uintmax_t nb, int pow);
 char *ft_itoa_base(int value, int base);
@@ -59,7 +61,8 @@ int checkzeroflag(s_flags **flag);
 int findprecision(const char *format, int *findex);
 //handle options
 int findprecision(const char *format, int *findex);
-char *flagformating(char *str, s_flags **flag, long long data);
+char *flagformating(char *str, s_flags **flag);
+void isnegative(s_flags **flag, int data);
 //printf
 int ft_printf(const char *format, ...);
 #endif

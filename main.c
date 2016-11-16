@@ -5,7 +5,7 @@ int main()
 	void *ptr;
 	size_t size;
 	size = 10;
-	int i;
+	//int i;
 	//unsigned long l = 12356.613489;
 
 	ptr = "x";
@@ -19,9 +19,10 @@ int main()
 	// printf("Decimal:\t%i %d %+.6i %i %.0i %+i %u\n", 1, 2, 3, 0, 0, 4, -1);
 	//i = ft_printf("fuck it%-+.51hhs\n", "sup fam");
 	//ft_printf("fuck it%hhd\n", 12341);
-	i = ft_printf("fuck it% 3d\n",-1923);
-	printf("% d\n",1923);
-	//printf("%d\n",i);
+	//i = ft_printf("fuck it%#i\n",-1923);
+	//printf("%.5d\n",1923);
+	printf("%+11d\n",20);
+	ft_printf("%+11d\n",20);
 	//printf("%+15dqwer\n", -20);
 	//ft_putnbr(size);
 	//ft_printf("%i\n",i);
