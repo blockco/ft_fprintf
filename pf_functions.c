@@ -27,6 +27,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	tempflag = *flag;
 	str = NULL;
 	data = va_arg(*args,ssize_t);
+	isnegative(&tempflag, (long long)data);
 	if (checkzeroflag(&tempflag) == 1)
 		str = ft_itoa_base((int)data,10);
 	else if (tempflag->z)
@@ -41,7 +42,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 		str = ft_itoa_base((short)data,10);
 	else if (tempflag->hh)
 		str = ft_itoa_base((signed char)data,10);
-	str = (char*)flagformating(str, &tempflag, (long long)data);
+	str = (char*)flagformating(str, &tempflag);
 	ft_putstr(str);
 }
 //X hex
