@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/17 13:00:18 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/17 15:38:40 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 /*                                                                            */
@@ -14,7 +14,7 @@
 
 #include "ft_printf.h"
 
-void isnegative(s_flags **flag, int data)
+void isnegative(s_flags **flag, intmax_t data)
 {
 	s_flags *tempflag;
 	tempflag = *flag;
