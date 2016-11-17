@@ -21,17 +21,17 @@ void pf_putstr(va_list *args, s_flags **flag)
 void pf_putnbr(va_list *args, s_flags **flag)
 {
 	char *str;
-	ssize_t data;
+	void *data;
 
 	s_flags *tempflag;
 	tempflag = *flag;
 	str = NULL;
-	data = va_arg(*args,ssize_t);
+	data = va_arg(*args,void*);
 	isnegative(&tempflag, (long long)data);
 	if (checkzeroflag(&tempflag) == 1)
 		str = ft_itoa_base((int)data,10);
-	else if (tempflag->z)
-		str = ft_itoa_base(data,10);
+	else if (tempflag->zflag)
+		str = ft_itoa_base((ssize_t)data,10);
 	else if (tempflag->j)
 		str = ft_itoa_base((intmax_t)data,10);
 	else if (tempflag->ll)
@@ -42,7 +42,8 @@ void pf_putnbr(va_list *args, s_flags **flag)
 		str = ft_itoa_base((short)data,10);
 	else if (tempflag->hh)
 		str = ft_itoa_base((signed char)data,10);
-	str = (char*)flagformating(str, &tempflag);
+	if (!checkoptions(&tempflag))
+		str = (char*)flagformating(str, &tempflag);
 	ft_putstr(str);
 }
 //X hex
@@ -55,7 +56,7 @@ void pf_x_handle(va_list *args, s_flags **flag)
 	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
 		str = ft_itoa_base((unsigned int)data,16);
-	else if (tempflag->z)
+	else if (tempflag->zflag)
 		str = ft_itoa_base(data,16);
 	else if (tempflag->j)
 		str = ft_itoa_base((uintmax_t)data,16);
@@ -79,7 +80,7 @@ void pf_xlow_handle(va_list *args, s_flags **flag)
 	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
 		str = ft_itoa_baselow((unsigned int)data,16);
-	else if (tempflag->z)
+	else if (tempflag->zflag)
 		str = ft_itoa_baselow(data,16);
 	else if (tempflag->j)
 		str = ft_itoa_baselow((uintmax_t)data,16);
@@ -103,7 +104,7 @@ void pf_o_handle(va_list *args, s_flags **flag)
 	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
 		str = ft_itoa_baselow((unsigned int)data,8);
-	else if (tempflag->z)
+	else if (tempflag->zflag)
 		str = ft_itoa_baselow(data,8);
 	else if (tempflag->j)
 		str = ft_itoa_baselow((uintmax_t)data,8);
@@ -127,7 +128,7 @@ void pf_oup_handle(va_list *args, s_flags **flag)
 	data = va_arg(*args,size_t);
 	if (checkzeroflag(&tempflag) == 1)
 		str = ft_itoa_baselow((unsigned int)data,8);
-	else if (tempflag->z)
+	else if (tempflag->zflag)
 		str = ft_itoa_baselow(data,8);
 	else if (tempflag->j)
 		str = ft_itoa_baselow((uintmax_t)data,8);

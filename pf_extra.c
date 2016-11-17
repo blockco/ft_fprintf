@@ -11,8 +11,8 @@ uintmax_t		ft_pow(uintmax_t nb, int pow)
 char *ft_itoa_baselow(int value, int base)
 {
 	char hex[16] = "0123456789abcdef";
-	long n = value;
-	int size;
+	int n = value;
+	long size;
 	char *ret;
 	if (value == 0)
 		return ("0");

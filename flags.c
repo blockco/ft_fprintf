@@ -9,7 +9,6 @@ void	setflags(s_flags **flag) //move
 	tempflag->l = 0;
 	tempflag->ll = 0;
 	tempflag->j = 0;
-	tempflag->z = 0;
 	tempflag->hash = 0;
 	tempflag->zflag = 0;
 	tempflag->mflag = 0;
@@ -17,6 +16,7 @@ void	setflags(s_flags **flag) //move
 	tempflag->space = 0;
 	tempflag->precision = 0;
 	tempflag->isnegative = 0;
+	tempflag->zero = 0;
 }
 
 int findprecision(const char *format, int *findex)
@@ -119,7 +119,7 @@ void	findflags(s_flags **flag, int *findex, const char *format) //move
 		else if (format[temp] == 'j')
 			tempflag->j = 1;
 		else if (format[temp] == 'z')
-			tempflag->z = 1;
+			tempflag->zflag = 1;
 		temp++;
 	}
 	*findex = temp;

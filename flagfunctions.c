@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/16 08:08:07 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/17 13:00:18 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 /*                                                                            */
@@ -30,9 +30,19 @@ int checkzeroflag(s_flags **flag)
 {
 	s_flags *tempflag;
 	tempflag = *flag;
-	if (tempflag->z == 0 && tempflag->j == 0 &&
+	if (tempflag->zflag == 0 && tempflag->j == 0 &&
 		tempflag->ll == 0 && tempflag->l == 0 && tempflag->h == 0
-		&& tempflag->hh == 0 && tempflag->hash == 0 && tempflag->zflag == 0)
+		&& tempflag->hh == 0 && tempflag->hash == 0)
+		return 1;
+	return 0;
+}
+
+int checkoptions(s_flags **flag)
+{
+	s_flags *tempflag;
+	tempflag = *flag;
+	if (tempflag->space == 0 && tempflag->sign == 0 &&
+		tempflag->hash == 0 && tempflag->zero == 0 && tempflag->mflag == 0)
 		return 1;
 	return 0;
 }
@@ -113,7 +123,6 @@ char *flagformating(char *str, s_flags **flag)
 	char *test = NULL;
 	char *buffer = NULL;
 	int size;
-
 	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
 	{
 		// ft_putendl("################### IN Percision");
@@ -126,7 +135,9 @@ char *flagformating(char *str, s_flags **flag)
 			size--;
 		}
 		else
+		{
 			test = ft_strsub((char const*)str, 0, ft_strlen(str));
+		}
 		temp = makespace((tempflag->precision - size), '0');
 		temp = betterjoin(temp,test);
 		if (str[0] == '-')
@@ -135,20 +146,54 @@ char *flagformating(char *str, s_flags **flag)
 	}
 	if ((tempflag->sign == -1) || (tempflag->sign > 0))
 	{
-		// ft_putnbr(tempflag->sign);
-		// ft_putchar('\n');
 		if (temp == NULL)
 			temp = ft_strdup((const char*)str);
 		if(tempflag->sign > 0)
 		{
-			//ft_putendl(temp);
+			ft_putendl("fucking here");
+			size = ft_strlen(temp);
+			ft_putendl(temp);
+			if (str[0] == '-')
+				test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
+			else
+				test = ft_strsub((char const*)str, 0, ft_strlen(temp));
+			size++;
+			if ((tempflag->precision - size) > 0)
+				buffer = makespace((tempflag->sign - size), ' ');
+			else
+				buffer = "";
+			ft_putendl("here bitch");
+			if (str[0] == '-')
+				temp = betterjoin("-",temp);
+			else
+				temp = betterjoin("+",temp);
+			temp = betterjoin(buffer,temp);
+		}
+		else if (tempflag->sign == -1)
+		{
+			if (tempflag->isnegative && temp[0] != '-')
+				temp = betterjoin("-",temp);
+			else if (!tempflag->isnegative )
+				temp = betterjoin("+",temp);
+		}
+	}
+	else if ((tempflag->space == -1) || (tempflag->space > 0))
+	{
+		if (temp == NULL)
+			temp = ft_strdup((const char*)str);
+		if(tempflag->space > 0)
+		{
 			size = ft_strlen(temp);
 			if (str[0] == '-')
 				test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
 			else
 				test = ft_strsub((char const*)str, 0, ft_strlen(temp));
 			size++;
-			buffer = makespace((tempflag->sign - size), ' ');
+			if ((tempflag->space - size) > 0)
+				buffer = makespace((tempflag->sign - size), ' ');
+			else
+				buffer = "";
+			ft_putendl("here bitch");
 			if (str[0] == '-')
 				temp = betterjoin("-",temp);
 			else
@@ -160,13 +205,8 @@ char *flagformating(char *str, s_flags **flag)
 			if (tempflag->isnegative)
 				temp = betterjoin("-",temp);
 			else
-				temp = betterjoin("+",temp);
+				temp = betterjoin(" ",temp);
 		}
-	}
-	else if(tempflag->space)
-	{
-		//do space
-		return "Hello2";
 	}
 	if (tempflag->mflag)
 	{
@@ -175,7 +215,7 @@ char *flagformating(char *str, s_flags **flag)
 	}
 	else if (tempflag->zflag && tempflag->precision == 0)
 	{
-
+		//zero flag
 	}
 	if (tempflag->hash)
 	{
