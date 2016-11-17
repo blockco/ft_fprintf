@@ -8,11 +8,11 @@ uintmax_t		ft_pow(uintmax_t nb, int pow)
 		return (nb * ft_pow(nb, pow - 1));
 }
 
-char *ft_itoa_baselow(int value, int base)
+char *ft_itoa_baselow(intmax_t value, int base)
 {
 	char hex[16] = "0123456789abcdef";
-	int n = value;
-	long size;
+	intmax_t n = value;
+	intmax_t size;
 	char *ret;
 	if (value == 0)
 		return ("0");
@@ -35,11 +35,11 @@ char *ft_itoa_baselow(int value, int base)
 	return ret;
 }
 
-char *ft_itoa_base(int value, int base)
+char *ft_itoa_base(intmax_t value, int base)
 {
 	char hex[16] = "0123456789ABCDEF";
-	long n = value;
-	int size;
+	intmax_t n = value;
+	intmax_t size;
 	char *ret;
 	if (value == 0)
 		return ("0");
@@ -62,9 +62,9 @@ char *ft_itoa_base(int value, int base)
 	return ret;
 }
 
-int findsize(int value, int base)
+int findsize(intmax_t value, int base)
 {
-	int size;
+	intmax_t size;
 
 	size = 0;
 	while (value)
