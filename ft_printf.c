@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/17 15:30:51 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/18 11:48:11 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int ft_printf(const char *format, ...)
 			if (format[findex] == '.')
 				flag->precision = findprecision(format, &findex);
 			findflags(&flag, &findex, format);
-			g_gl[findfunind(format[findex])](&args,&flag);
-			//flagformating(&flag); //flag handling
+			flag->conid = findfunind(format[findex]);
+			g_gl[flag->conid](&args,&flag);
 		}
 		else
 			ft_putchar(format[findex]);

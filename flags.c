@@ -17,6 +17,7 @@ void	setflags(s_flags **flag) //move
 	tempflag->precision = 0;
 	tempflag->isnegative = 0;
 	tempflag->zero = 0;
+	tempflag->conid = 0;
 }
 
 int findprecision(const char *format, int *findex)
@@ -77,10 +78,7 @@ void	setsymb(s_flags **flag, int *findex, const char *format)
 		|| format[temp] == ' ')
 	{
 		if (format[temp] == '#')
-		{
-			tempflag->hash = 1;
-			temp++;
-		}
+			tempflag->hash = findprecisionspace(format, &temp);
 		else if (format[temp] == '0')
 			tempflag->zflag = findprecision(format, &temp);
 		else if (format[temp] == '-')

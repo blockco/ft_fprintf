@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/17 15:38:40 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/18 12:23:05 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 /*                                                                            */
@@ -32,7 +32,7 @@ int checkzeroflag(s_flags **flag)
 	tempflag = *flag;
 	if (tempflag->zflag == 0 && tempflag->j == 0 &&
 		tempflag->ll == 0 && tempflag->l == 0 && tempflag->h == 0
-		&& tempflag->hh == 0 && tempflag->hash == 0)
+		&& tempflag->hh == 0)
 		return 1;
 	return 0;
 }
@@ -115,116 +115,6 @@ char *betterjoin(char *first, char *second)
 	return (ret);
 }
 //
-char *flagformating(char *str, s_flags **flag)
-{
-	s_flags *tempflag;
-	tempflag = *flag;
-	char *temp = NULL;
-	char *test = NULL;
-	char *buffer = NULL;
-	int size;
-	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
-	{
-		// ft_putendl("################### IN Percision");
-		// ft_putnbr(tempflag->precision);
-		//ft_putchar('\n');
-		size = ft_strlen(str);
-		if (str[0] == '-')
-		{
-			test = ft_strsub((char const*)str, 1, ft_strlen(str) - 1);
-			size--;
-		}
-		else
-		{
-			test = ft_strsub((char const*)str, 0, ft_strlen(str));
-		}
-		temp = makespace((tempflag->precision - size), '0');
-		temp = betterjoin(temp,test);
-		if (str[0] == '-')
-			temp = betterjoin("-",temp);
-		//ft_putendl(temp);
-	}
-	if ((tempflag->sign == -1) || (tempflag->sign > 0))
-	{
-		if (temp == NULL)
-			temp = ft_strdup((const char*)str);
-		if(tempflag->sign > 0)
-		{
-			ft_putendl("fucking here");
-			size = ft_strlen(temp);
-			ft_putendl(temp);
-			if (str[0] == '-')
-				test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
-			else
-				test = ft_strsub((char const*)str, 0, ft_strlen(temp));
-			size++;
-			if ((tempflag->precision - size) > 0)
-				buffer = makespace((tempflag->sign - size), ' ');
-			else
-				buffer = "";
-			ft_putendl("here bitch");
-			if (str[0] == '-')
-				temp = betterjoin("-",temp);
-			else
-				temp = betterjoin("+",temp);
-			temp = betterjoin(buffer,temp);
-		}
-		else if (tempflag->sign == -1)
-		{
-			if (tempflag->isnegative && temp[0] != '-')
-				temp = betterjoin("-",temp);
-			else if (!tempflag->isnegative )
-				temp = betterjoin("+",temp);
-		}
-	}
-	else if ((tempflag->space == -1) || (tempflag->space > 0))
-	{
-		if (temp == NULL)
-			temp = ft_strdup((const char*)str);
-		if(tempflag->space > 0)
-		{
-			size = ft_strlen(temp);
-			if (str[0] == '-')
-				test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
-			else
-				test = ft_strsub((char const*)str, 0, ft_strlen(temp));
-			size++;
-			if ((tempflag->space - size) > 0)
-				buffer = makespace((tempflag->sign - size), ' ');
-			else
-				buffer = "";
-			ft_putendl("here bitch");
-			if (str[0] == '-')
-				temp = betterjoin("-",temp);
-			else
-				temp = betterjoin("+",temp);
-			temp = betterjoin(buffer,temp);
-		}
-		else if (tempflag->sign == -1)
-		{
-			if (tempflag->isnegative)
-				temp = betterjoin("-",temp);
-			else
-				temp = betterjoin(" ",temp);
-		}
-	}
-	if (tempflag->mflag)
-	{
-		//minus left?
-		return "Hello3";
-	}
-	else if (tempflag->zflag && tempflag->precision == 0)
-	{
-		//zero flag
-	}
-	if (tempflag->hash)
-	{
-		//1 check and add 0x for hex(x)
-		//2 check and add 0x for octal(o)
-		return "Hello4";
-	}
-	return temp;
-}
 // char *flagformating(char *str, s_flags **flag)
 // {
 // 	char *temp;

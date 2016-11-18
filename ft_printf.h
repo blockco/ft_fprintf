@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/17 15:38:59 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/18 12:21:11 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct s_flags
 	int precision;
 	int isnegative;
 	int zero;
+	int conid;
 }				s_flags;
 
 extern char *g_format;
@@ -62,9 +63,10 @@ int checkzeroflag(s_flags **flag);
 int findprecision(const char *format, int *findex);
 int checkoptions(s_flags **flag);
 //handle options
-int findprecision(const char *format, int *findex);
-char *flagformating(char *str, s_flags **flag);
-void isnegative(s_flags **flag, intmax_t data);
+int 	findprecision(const char *format, int *findex);
+char 	*flagformating(char *str, s_flags **flag);
+void 	isnegative(s_flags **flag, intmax_t data);
+char	*makespace(int size, int c);
 //printf
 int ft_printf(const char *format, ...);
 #endif
