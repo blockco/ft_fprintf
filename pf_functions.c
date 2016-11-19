@@ -44,6 +44,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 		str = ft_itoa_base((signed char)data,10);
 	if (!checkoptions(&tempflag))
 		str = (char*)flagformating(str, &tempflag);
+	//find size
 	ft_putstr(str);
 }
 //X hex

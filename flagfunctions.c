@@ -6,9 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/18 12:23:05 by rpassafa         ###   ########.us       */
-/*                                                                            */
-/* ************************************************************************** */
+/*   Updated: 2016/11/18 14:16:25 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,34 +112,3 @@ char *betterjoin(char *first, char *second)
 	ret = ft_strjoin(first, second);
 	return (ret);
 }
-//
-// char *flagformating(char *str, s_flags **flag)
-// {
-// 	char *temp;
-// 	char *test;
-// 	s_flags *tempflag;
-// 	tempflag = *flag;
-// 	test = makespace(tempflag->space, ' ');
-// 	temp = ft_strnew(ft_strlen(str) + tempflag->space);
-// 	temp = ft_strjoin(test,str);
-// 	return temp;
-// }
-
-// char *flagformating(char *str, s_flags **flag, long long data)
-// {
-// 	char *temp;
-// 	char *test;
-// 	s_flags *tempflag;
-// 	tempflag = *flag;
-//
-// 	if (tempflag->space || tempflag->sign)
-// 	{
-// 		if (tempflag->sign)
-// 			tempflag->sign =
-// 	}
-// 	test = makespace(tempflag->space, ' ');
-// 	temp = ft_strnew(ft_strlen(str) + tempflag->space);
-// 	temp = ft_strjoin(test,str);
-// 	data = 0;
-// 	return temp;
-// }

@@ -175,5 +175,7 @@ char *flagformating(char *str, s_flags **flag)
 	if (tempflag->hash && (tempflag->conid == 6 || tempflag->conid == 7
 	|| tempflag->conid == 11 || tempflag->conid == 10))
 		temp = hashflag(str, temp, &tempflag);
+	if (temp == NULL)
+		temp = ft_strdup((const char*)str);
 	return temp;
 }
