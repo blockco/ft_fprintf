@@ -157,6 +157,21 @@ char *hashflag(char *str, char *temp, s_flags **flag)
 	}
 	return (temp);
 }
+
+char *extraflag(char *str, char *temp, s_flags **flag)
+{
+	s_flags *tempflag;
+	tempflag = *flag;
+	char *buffer;
+	if (temp == NULL)
+		temp = ft_strdup((const char*)str);
+	if (tempflag->extra > 0)
+	{
+		buffer = makespace(tempflag->extra, ' ');
+		temp = betterjoin(buffer, temp);
+	}
+	return (temp);
+}
 char *flagformating(char *str, s_flags **flag)
 {
 	s_flags *tempflag;
@@ -168,6 +183,8 @@ char *flagformating(char *str, s_flags **flag)
 		temp = signflag(str, temp, &tempflag);
 	else if ((tempflag->space == -1) || (tempflag->space > 0))
 		temp = spaceflag(str, temp, &tempflag);
+	else if (tempflag->extra > 0)
+		temp = extraflag(str, temp, &tempflag);
 	if (tempflag->mflag)
 		temp = mflag(str, temp, &tempflag);
 	else if (tempflag->zero && tempflag->precision == 0)

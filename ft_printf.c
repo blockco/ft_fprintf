@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/21 17:25:19 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/21 19:12:42 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,19 @@ int ft_printf(const char *format, ...)
 				|| format[findex] == '-' || format[findex] == '+' ||
 				format[findex] == ' ')
 				setsymb(&flag,&findex,format);
-			else if (format[findex] == '.')
+			if (format[findex] >= '0' && format[findex] <= '9')
+				flag->extra = findprecisionextra(format, &findex);
+			if (format[findex] == '.')
 				flag->precision = findprecision(format, &findex);
+			if (format[findex] == '%')
+			{
+				ft_putchar(format[findex]);
+				flag->size = flag->size + 1;
+			}
 			findflags(&flag, &findex, format);
 			flag->conid = findfunind(format[findex]);
-			g_gl[flag->conid](&args,&flag);
+			if (flag->conid > -1)
+				g_gl[flag->conid](&args,&flag);
 		}
 		else
 		{

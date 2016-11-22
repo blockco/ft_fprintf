@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/21 15:41:02 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/21 19:04:34 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	struct s_flags
 	int zero;
 	int conid;
 	int size;
+	int extra;
 }				s_flags;
 
 extern char *g_format;
@@ -62,6 +63,8 @@ char *ft_itoa_baselow(intmax_t value, int base);
 //flag handlers
 int checkzeroflag(s_flags **flag);
 int findprecision(const char *format, int *findex);
+int findprecisionspace(const char *format, int *findex);
+int findprecisionextra(const char *format, int *findex);
 int checkoptions(s_flags **flag);
 //handle options
 int 	findprecision(const char *format, int *findex);

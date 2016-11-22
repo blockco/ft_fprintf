@@ -19,6 +19,7 @@ void	setflags(s_flags **flag) //move
 	tempflag->zero = 0;
 	tempflag->conid = 0;
 	tempflag->size = 0;
+	tempflag->extra = 0;
 }
 
 int findprecision(const char *format, int *findex)
@@ -50,9 +51,28 @@ int findprecisionspace(const char *format, int *findex)
 	int temp;
 	temp = *findex;
 	temp++;
-	ft_putendl("\nchillin here");
-	ft_putchar(format[temp]);
-	ft_putchar('\n');
+	while(format[temp] >= '0' && format[temp] <= '9')
+	{
+		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
+		{
+			i = i + format[temp] - 48;
+			i = i * 10;
+		}
+		else
+			i = i + format[temp] - 48;
+		temp++;
+	}
+	*findex = temp;
+	if (i == 0)
+		i = -1;
+	return i;
+}
+
+int findprecisionextra(const char *format, int *findex)
+{
+	int i = 0;
+	int temp;
+	temp = *findex;
 	while(format[temp] >= '0' && format[temp] <= '9')
 	{
 		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
@@ -78,7 +98,8 @@ void	setsymb(s_flags **flag, int *findex, const char *format)
 	temp = *findex;
 	while (format[temp] == '#' || format[temp] == '0'
 		|| format[temp] == '-' || format[temp] == '+'
-		|| format[temp] == ' ')
+		|| format[temp] == ' ' || (format[temp] >= '0'
+		&& format[temp] <= '9'))
 	{
 		if (format[temp] == '#')
 			tempflag->hash = findprecisionspace(format, &temp);
@@ -90,6 +111,8 @@ void	setsymb(s_flags **flag, int *findex, const char *format)
 			tempflag->sign = findprecisionspace(format, &temp);
 		else if (format[temp] == ' ')
 			tempflag->space = findprecisionspace(format, &temp);
+		else if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
+			tempflag->extra = findprecisionspace(format, &temp);
 	}
 	*findex = temp;
 	*flag = tempflag;
