@@ -29,19 +29,19 @@ char *signflag(char *str, char *temp, s_flags **flag)
 	tempflag = *flag;
 	char *buffer;
 	int size;
-	char *test;
-
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	if(tempflag->sign > 0)
 	{
 		size = ft_strlen(temp);
 		if (str[0] == '-')
-			test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
+			temp = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
 		else
-			test = ft_strsub((char const*)str, 0, ft_strlen(temp));
-		size++;
-		if ((tempflag->precision - size) > 0)
+		{
+			temp = ft_strsub((char const*)str, 0, ft_strlen(temp));
+			size++;
+		}
+		if ((tempflag->sign - size) > 0)
 			buffer = makespace((tempflag->sign - size), ' ');
 		else
 			buffer = "";
