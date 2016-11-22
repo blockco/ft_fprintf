@@ -18,6 +18,7 @@ void	setflags(s_flags **flag) //move
 	tempflag->isnegative = 0;
 	tempflag->zero = 0;
 	tempflag->conid = 0;
+	tempflag->size = 0;
 }
 
 int findprecision(const char *format, int *findex)

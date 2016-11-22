@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/18 16:50:22 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/21 17:25:19 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int ft_printf(const char *format, ...)
 	flag = malloc(sizeof(s_flags));
 	findex = 0;
 	va_start(args,format);
+	setflags(&flag);
 	while (format[findex])
 	{
-		setflags(&flag);
 		if (format[findex] == '%')
 		{
 			findex++;
@@ -65,16 +65,19 @@ int ft_printf(const char *format, ...)
 				|| format[findex] == '-' || format[findex] == '+' ||
 				format[findex] == ' ')
 				setsymb(&flag,&findex,format);
-			if (format[findex] == '.')
+			else if (format[findex] == '.')
 				flag->precision = findprecision(format, &findex);
 			findflags(&flag, &findex, format);
 			flag->conid = findfunind(format[findex]);
 			g_gl[flag->conid](&args,&flag);
 		}
 		else
+		{
+			flag->size = flag->size + 1;
 			ft_putchar(format[findex]);
+		}
 		findex++;
 	}
 	va_end(args);
-	return flag->mflag;
+	return flag->size;
 }

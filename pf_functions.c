@@ -13,8 +13,10 @@ void pf_putchar(va_list *args, s_flags **flag)
 void pf_putstr(va_list *args, s_flags **flag)
 {
 	char *str;
-	flag = NULL;
+	s_flags *tempflag;
+	tempflag = *flag;
 	str = va_arg(*args,char*);
+	tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
 //i,d
@@ -44,7 +46,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 		str = ft_itoa_base((signed char)data,10);
 	if (!checkoptions(&tempflag))
 		str = (char*)flagformating(str, &tempflag);
-	//find size
+	tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
 //X hex
@@ -71,6 +73,7 @@ void pf_x_handle(va_list *args, s_flags **flag)
 		str = ft_itoa_base((unsigned char)data,16);
 	if (!checkoptions(&tempflag))
 		str = (char*)flagformating(str, &tempflag);
+	tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
 //x hex low
@@ -97,6 +100,7 @@ void pf_xlow_handle(va_list *args, s_flags **flag)
 		str = ft_itoa_baselow((unsigned char)data,16);
 	if (!checkoptions(&tempflag))
 		str = (char*)flagformating(str, &tempflag);
+		tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
 //o octo
@@ -124,6 +128,7 @@ void pf_o_handle(va_list *args, s_flags **flag)
 		str = ft_itoa_baselow((unsigned char)data,8);
 	if (!checkoptions(&tempflag))
 		str = (char*)flagformating(str, &tempflag);
+	tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
 //O octo
@@ -150,18 +155,19 @@ void pf_oup_handle(va_list *args, s_flags **flag)
 		str = ft_itoa_baselow((unsigned char)data,8);
 	if (!checkoptions(&tempflag))
 		str = (char*)flagformating(str, &tempflag);
+	tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
 //p memory
 void pf_p_handle(va_list *args, s_flags **flag)
 {
-	uintmax_t data;
 	void *ptr;
 	char *str;
-	flag = NULL;
+	s_flags *tempflag;
+	tempflag = *flag;
 	ptr = va_arg(*args,void*);
-	data = ((uintmax_t)ptr);
-	str = ft_itoa_baselow(data,16);
+	str = ft_itoa_baselow((uintmax_t)ptr,16);
 	str = ft_strjoin("0x",str);
+	tempflag->size = tempflag->size + ft_strlen(str);
 	ft_putstr(str);
 }
