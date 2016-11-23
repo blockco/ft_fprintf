@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/21 19:04:34 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/23 02:19:33 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef	struct s_flags
 	int conid;
 	int size;
 	int extra;
+	char *ret;
 }				s_flags;
 
 extern char *g_format;

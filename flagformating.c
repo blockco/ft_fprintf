@@ -165,6 +165,8 @@ char *extraflag(char *str, char *temp, s_flags **flag)
 	char *buffer;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
+	if (tempflag->conid == -1)
+		tempflag->extra--;
 	if (tempflag->extra > 0)
 	{
 		buffer = makespace(tempflag->extra, ' ');
@@ -179,7 +181,7 @@ char *flagformating(char *str, s_flags **flag)
 	char *temp = NULL;
 	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
 		temp = percisionflag(str, temp, &tempflag);
-	if ((tempflag->sign == -1) || (tempflag->sign > 0))
+	if (((tempflag->sign == -1) || (tempflag->sign > 0)) && (tempflag->conid > -1))
 		temp = signflag(str, temp, &tempflag);
 	else if ((tempflag->space == -1) || (tempflag->space > 0))
 		temp = spaceflag(str, temp, &tempflag);

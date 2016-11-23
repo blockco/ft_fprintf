@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/21 19:12:42 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/23 02:47:24 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,58 @@ int findfunind(char c)
 	return -1;
 }
 
+// int ft_printf(const char *format, ...)
+// {
+// 	int findex;
+// 	va_list args;
+// 	s_flags *flag;
+// 	flag = malloc(sizeof(s_flags));
+// 	findex = 0;
+// 	va_start(args,format);
+// 	setflags(&flag);
+// 	while (format[findex])
+// 	{
+// 		if (format[findex] == '%')
+// 		{
+// 			findex++;
+// 			if (format[findex] == '#' || format[findex] == '0'
+// 				|| format[findex] == '-' || format[findex] == '+' ||
+// 				format[findex] == ' ')
+// 				setsymb(&flag,&findex,format);
+// 			if (format[findex] >= '0' && format[findex] <= '9')
+// 				flag->extra = findprecisionextra(format, &findex);
+// 			if (format[findex] == '.')
+// 				flag->precision = findprecision(format, &findex);
+// 			if (format[findex] == '%')
+// 			{
+// 				ft_putchar(format[findex]);
+// 				flag->size = flag->size + 1;
+// 			}
+// 			findflags(&flag, &findex, format);
+// 			flag->conid = findfunind(format[findex]);
+// 			if (flag->conid > -1)
+// 				g_gl[flag->conid](&args,&flag);
+// 		}
+// 		else
+// 		{
+// 			flag->size = flag->size + 1;
+// 			ft_putchar(format[findex]);
+// 		}
+// 		findex++;
+// 	}
+// 	va_end(args);
+// 	return flag->size;
+// }
+
+char *charadder(char *str, char c)
+{
+	char *temp;
+	temp = (char*)malloc(2);
+	temp[0] = c;
+	temp[1] = '\0';
+	return(betterjoin(str,temp));
+}
+
 int ft_printf(const char *format, ...)
 {
 	int findex;
@@ -58,33 +110,54 @@ int ft_printf(const char *format, ...)
 	setflags(&flag);
 	while (format[findex])
 	{
-		if (format[findex] == '%')
-		{
-			findex++;
-			if (format[findex] == '#' || format[findex] == '0'
+	if (format[findex] == '%')
+	{
+		findex++;
+		while (format[findex] == '#' || format[findex] == '0'
+			|| format[findex] == '-' || format[findex] == '+' ||
+			format[findex] == ' ' ||
+			(format[findex] >= '0' && format[findex] <= '9') ||
+			format[findex] == '.' ||
+			(format[findex] == 'l' && format[findex + 1] == 'l') ||
+			(format[findex] == 'h' && format[findex + 1] == 'h') ||
+			format[findex] == 'h' || format[findex] == 'l' ||
+			format[findex] == 'j' || format[findex] == 'z')
+			{
+				if (format[findex] == '#' || format[findex] == '0'
 				|| format[findex] == '-' || format[findex] == '+' ||
 				format[findex] == ' ')
 				setsymb(&flag,&findex,format);
-			if (format[findex] >= '0' && format[findex] <= '9')
+				else if (format[findex] >= '0' && format[findex] <= '9')
 				flag->extra = findprecisionextra(format, &findex);
-			if (format[findex] == '.')
+				else if (format[findex] == '.')
 				flag->precision = findprecision(format, &findex);
-			if (format[findex] == '%')
-			{
-				ft_putchar(format[findex]);
-				flag->size = flag->size + 1;
+				else if ((format[findex] == 'l' && format[findex + 1] == 'l') ||
+				(format[findex] == 'h' && format[findex + 1] == 'h') ||
+				format[findex] == 'h' || format[findex] == 'l' ||
+				format[findex] == 'j' || format[findex] == 'z')
+				findflags(&flag, &findex, format);
 			}
-			findflags(&flag, &findex, format);
-			flag->conid = findfunind(format[findex]);
-			if (flag->conid > -1)
-				g_gl[flag->conid](&args,&flag);
-		}
-		else
+		flag->conid = findfunind(format[findex]);
+		if (format[findex] == '%')
 		{
-			flag->size = flag->size + 1;
-			ft_putchar(format[findex]);
+			while(format[findex])
+			{
+				flag->ret = charadder(flag->ret, format[findex]);
+				findex++;
+			}
+			flag->ret = flagformating(flag->ret, &flag);
+			ft_putstr(flag->ret);
+			return (ft_strlen(flag->ret));
 		}
-		findex++;
+		if (flag->conid > -1)
+			g_gl[flag->conid](&args,&flag);
+	}
+	else
+	{
+		flag->size = flag->size + 1;
+		ft_putchar(format[findex]);
+	}
+	findex++;
 	}
 	va_end(args);
 	return flag->size;
