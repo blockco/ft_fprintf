@@ -46,13 +46,24 @@ int findprecision(const char *format, int *findex)
 	return i;
 }
 
+int findhash(const char *format, int *findex)
+{
+	int temp;
+
+	format = NULL;
+	temp = *findex;
+	temp++;
+	*findex = temp;
+	return (-1);
+}
+
 int findprecisionspace(const char *format, int *findex)
 {
 	int i = 0;
 	int temp;
 	temp = *findex;
 	temp++;
-	while(format[temp] >= '0' && format[temp] <= '9')
+	while(format[temp] >= '1' && format[temp] <= '9')
 	{
 		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
 		{
@@ -98,7 +109,7 @@ void	setsymb(s_flags **flag, int *findex, const char *format)
 	tempflag = *flag;
 	temp = *findex;
 		if (format[temp] == '#')
-			tempflag->hash = findprecisionspace(format, &temp);
+			tempflag->hash = findhash(format, &temp);
 		else if (format[temp] == '0')
 			tempflag->zero = findprecision(format, &temp);
 		else if (format[temp] == '-')

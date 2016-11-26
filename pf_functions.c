@@ -16,6 +16,7 @@ void pf_putstr(va_list *args, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	str = va_arg(*args,char*);
+	tempflag->size = ft_strlen(str) + tempflag->size;
 	ft_putstr(str);
 }
 //i,d
@@ -99,7 +100,6 @@ void pf_o_handle(va_list *args, s_flags **flag)
 	void* data;
 	s_flags *tempflag;
 	tempflag = *flag;
-	ft_putendl("hello");
 	data = va_arg(*args,void*);
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baselowu((unsigned int)data,8);

@@ -137,24 +137,18 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 
 char *hashflag(char *str, char *temp, s_flags **flag)
 {
-	int size;
-	char *buffer;
 	s_flags *tempflag;
 	tempflag = *flag;
-
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
-	if ((tempflag->conid == 6 || tempflag->conid == 7) && (temp[0] != '0'))
-		temp = betterjoin("0", temp);
-	else if ((tempflag->conid == 10 || tempflag->conid == 11) &&
-	(temp[0] != '0' && temp[1] != 'x'))
-		temp = betterjoin("0x", temp);
-	size = tempflag->hash - ft_strlen(temp);
-	if (size > 0)
-	{
-		buffer = makespace(size, ' ');
-		temp = betterjoin(buffer, temp);
-	}
+	if (ft_strcmp(temp,"0") == 0)
+		temp = ft_strdup("0");
+	else if(tempflag->conid == 10 && (temp[0] != '0' || temp[1] != 'x'))
+		temp = betterjoin("0x",temp);
+	else if(tempflag->conid == 11 && (temp[0] != '0' || temp[1] != 'x'))
+		temp = betterjoin("0X",temp);
+	else if((tempflag->conid == 7 || tempflag->conid == 6) && temp[0] != '0')
+		temp = betterjoin("0",temp);
 	return (temp);
 }
 
@@ -178,6 +172,22 @@ char *flagformating(char *str, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *temp = NULL;
+	if (tempflag->hash == -1 && (tempflag->zero > 0 || tempflag->mflag > 0))
+	{
+		if (tempflag->zero > 1)
+			tempflag->zero = tempflag->zero - 2;
+		else if (tempflag->zero == 1)
+			tempflag->zero = 0;
+		if (tempflag->mflag > 0)
+			tempflag->mflag = tempflag->mflag - 2;
+	}
+	if (tempflag->mflag)
+		temp = mflag(str, temp, &tempflag);
+	else if (tempflag->zero && tempflag->precision == 0)
+		temp = zeroflag(str, temp, &tempflag);
+	if (tempflag->hash == -1 && (tempflag->conid == 6 || tempflag->conid == 7
+		|| tempflag->conid == 11 || tempflag->conid == 10))
+		temp = hashflag(str, temp, &tempflag);
 	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
 		temp = percisionflag(str, temp, &tempflag);
 	if (((tempflag->sign == -1) || (tempflag->sign > 0)) && (tempflag->conid > -1))
@@ -186,16 +196,7 @@ char *flagformating(char *str, s_flags **flag)
 		temp = spaceflag(str, temp, &tempflag);
 	else if (tempflag->extra > 0)
 		temp = extraflag(str, temp, &tempflag);
-	if (tempflag->mflag)
-		temp = mflag(str, temp, &tempflag);
-	else if (tempflag->zero && tempflag->precision == 0)
-		temp = zeroflag(str, temp, &tempflag);
-	if (tempflag->hash && (tempflag->conid == 6 || tempflag->conid == 7
-	|| tempflag->conid == 11 || tempflag->conid == 10))
-		temp = hashflag(str, temp, &tempflag);
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
-	// ft_putnbr(tempflag->zero);
-	// ft_putchar('\n');
 	return temp;
 }
