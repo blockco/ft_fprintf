@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/21 17:48:56 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/25 18:25:25 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ char	*makespace(int size, int c)
 {
 	char *ret;
 	int i;
-
+	if (size < 0)
+		return ("");
 	i = 0;
 	ret = (char*)malloc(size+1);
 	ret[size] = '\0';

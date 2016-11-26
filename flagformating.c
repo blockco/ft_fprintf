@@ -130,7 +130,7 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 	if (size > 0)
 	{
 		buffer = makespace(size, '0');
-		temp = betterjoin(temp,buffer);
+		temp = betterjoin(buffer,temp);
 	}
 	return (temp);
 }
@@ -163,13 +163,12 @@ char *extraflag(char *str, char *temp, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *buffer;
+	buffer = "";
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
-	if (tempflag->conid == -1)
-		tempflag->extra--;
-	if (tempflag->extra > 0)
+	if (tempflag->extra)
 	{
-		buffer = makespace(tempflag->extra, ' ');
+		buffer = makespace(tempflag->extra - ft_strlen(temp), ' ');
 		temp = betterjoin(buffer, temp);
 	}
 	return (temp);
@@ -183,7 +182,7 @@ char *flagformating(char *str, s_flags **flag)
 		temp = percisionflag(str, temp, &tempflag);
 	if (((tempflag->sign == -1) || (tempflag->sign > 0)) && (tempflag->conid > -1))
 		temp = signflag(str, temp, &tempflag);
-	else if ((tempflag->space == -1) || (tempflag->space > 0))
+	else if (((tempflag->space == -1) || (tempflag->space > 0)) && (ft_strcmp(str,"%") != 0))
 		temp = spaceflag(str, temp, &tempflag);
 	else if (tempflag->extra > 0)
 		temp = extraflag(str, temp, &tempflag);
@@ -196,5 +195,7 @@ char *flagformating(char *str, s_flags **flag)
 		temp = hashflag(str, temp, &tempflag);
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
+	// ft_putnbr(tempflag->zero);
+	// ft_putchar('\n');
 	return temp;
 }

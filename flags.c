@@ -100,7 +100,7 @@ void	setsymb(s_flags **flag, int *findex, const char *format)
 		if (format[temp] == '#')
 			tempflag->hash = findprecisionspace(format, &temp);
 		else if (format[temp] == '0')
-			tempflag->zflag = findprecision(format, &temp);
+			tempflag->zero = findprecision(format, &temp);
 		else if (format[temp] == '-')
 			tempflag->mflag = findprecision(format, &temp);
 		else if (format[temp] == '+')
