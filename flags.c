@@ -43,6 +43,8 @@ int findprecision(const char *format, int *findex)
 		temp++;
 	}
 	*findex = temp;
+	if (i == 0)
+		i = -1;
 	return i;
 }
 

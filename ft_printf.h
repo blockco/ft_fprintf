@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/25 18:30:38 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/28 14:24:44 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,21 @@ int findprecision(const char *format, int *findex);
 int findprecisionspace(const char *format, int *findex);
 int findprecisionextra(const char *format, int *findex);
 int checkoptions(s_flags **flag);
+char *flagformatingstrings(char *str, s_flags **flag);
 //handle options
 int 	findprecision(const char *format, int *findex);
 char 	*flagformating(char *str, s_flags **flag);
 void 	isnegative(s_flags **flag, intmax_t data);
 char	*makespace(int size, int c);
+char*	percisionflag(char *str, char *temp, s_flags **flag);
+char 	*signflag(char *str, char *temp, s_flags **flag);
+char	*spaceflag(char *str, char *temp, s_flags **flag);
+char	*zeroflag(char *str, char *temp, s_flags **flag);
+char *hashflag(char *str, char *temp, s_flags **flag);
+char *extraflag(char *str, char *temp, s_flags **flag);
+char *mflag(char *str, char *temp, s_flags **flag);
+//handle Strings
+
 //printf
 int ft_printf(const char *format, ...);
 #endif

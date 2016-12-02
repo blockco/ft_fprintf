@@ -14,6 +14,7 @@ SRCS =	ft_printf.c \
 		flags.c \
 		flagfunctions.c \
 		flagformating.c \
+		flagformatingstrings.c \
 
 SRCSL =	libft/ft_putchar.c \
 		libft/ft_putstr.c \

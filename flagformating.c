@@ -20,6 +20,8 @@ char* percisionflag(char *str, char *temp, s_flags **flag)
 	temp = betterjoin(temp,test);
 	if (str[0] == '-')
 		temp = betterjoin("-",temp);
+	if (tempflag->precision == -1)
+		temp = "";
 	return (temp);
 }
 
@@ -188,7 +190,7 @@ char *flagformating(char *str, s_flags **flag)
 	if (tempflag->hash == -1 && (tempflag->conid == 6 || tempflag->conid == 7
 		|| tempflag->conid == 11 || tempflag->conid == 10))
 		temp = hashflag(str, temp, &tempflag);
-	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
+	if ((tempflag->precision > 0 || tempflag->precision == -1) && (tempflag->precision - ft_strlen(str) > 0))
 		temp = percisionflag(str, temp, &tempflag);
 	if (((tempflag->sign == -1) || (tempflag->sign > 0)) && (tempflag->conid > -1))
 		temp = signflag(str, temp, &tempflag);

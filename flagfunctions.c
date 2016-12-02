@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 01:51:43 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/11/25 18:25:25 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/11/28 15:51:14 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int checkoptions(s_flags **flag)
 	tempflag = *flag;
 	if (tempflag->space == 0 && tempflag->sign == 0 &&
 		tempflag->hash == 0 && tempflag->zero == 0 && tempflag->mflag == 0 &&
-		tempflag->extra == 0)
+		tempflag->extra == 0 && tempflag->precision == 0)
 		return 1;
 	return 0;
 }

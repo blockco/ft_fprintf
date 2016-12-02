@@ -16,8 +16,9 @@ void pf_putstr(va_list *args, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	str = va_arg(*args,char*);
-	tempflag->size = ft_strlen(str) + tempflag->size;
-	ft_putstr(str);
+	tempflag->ret = ft_strdup(str);
+	if (!checkoptions(&tempflag))
+		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
 }
 //i,d
 void pf_putnbr(va_list *args, s_flags **flag)
@@ -45,7 +46,8 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	else if (tempflag->hh)
 		tempflag->ret = ft_itoa_base((signed char)data,10);
 	if (!checkoptions(&tempflag))
-		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);}
+		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
+	}
 //X hex
 void pf_x_handle(va_list *args, s_flags **flag)
 {
