@@ -1,13 +1,22 @@
 #include "ft_printf.h"
+
+
 //c
 void pf_putchar(va_list *args, s_flags **flag)
 {
 	int c;
-	flag = NULL;
-	unsigned char temp;
+	char *hold;
+	s_flags *tempflag;
+	tempflag = *flag;
+	//unsigned char temp;
 	c = va_arg(*args,int);
-	temp = (unsigned char)c;
-	ft_putchar(c);
+	tempflag->ret = charadder(tempflag->ret, 'a');
+	if (!checkoptions(&tempflag))
+		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
+	hold = ft_strchr(tempflag->ret, 'a');
+	hold[0] = c;
+	if (c == 0)
+		tempflag->size = tempflag->size + 1;
 }
 //s
 void pf_putstr(va_list *args, s_flags **flag)
@@ -158,7 +167,7 @@ void pf_p_handle(va_list *args, s_flags **flag)
 //u
 void pf_u_handle(va_list *args, s_flags **flag)
 {
-	
+
 	void* data;
 	s_flags *tempflag;
 	tempflag = *flag;
