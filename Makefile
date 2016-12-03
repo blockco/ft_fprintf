@@ -209,6 +209,14 @@ clean:
 fclean:	clean
 		@/bin/rm -f $(NAME)
 
-re: fclean all
+remove:
+		@/bin/rm -f $(OBJS) $(OBJL) $(RMOBJ) $(OBJL1)
 
-.PHONY: all clean fclean re
+comp:
+		gcc -Wall -Wextra -Werror $(NAME) main.c
+
+re: fclean all remove
+
+rec:  re comp
+
+.PHONY: all clean fclean re remove comp
