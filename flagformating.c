@@ -39,21 +39,23 @@ char *signflag(char *str, char *temp, s_flags **flag)
 	{
 		size = ft_strlen(temp);
 		if (str[0] == '-')
-			temp = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
+			temp = ft_strsub((char const*)temp, 1, ft_strlen(temp));
 		else
 		{
 			temp = ft_strsub((char const*)str, 0, ft_strlen(temp));
 			size++;
 		}
-		if ((tempflag->sign - size) > 0)
+		if ((tempflag->sign - size) > 0 && tempflag->zero == 0)
 			buffer = makespace((tempflag->sign - size), ' ');
+		else if (tempflag->zero == -1)
+			buffer = makespace((tempflag->sign - size), '0');
 		else
 			buffer = "";
+		temp = betterjoin(buffer,temp);
 		if (str[0] == '-')
 			temp = betterjoin("-",temp);
 		else
 			temp = betterjoin("+",temp);
-		temp = betterjoin(buffer,temp);
 	}
 	else if (tempflag->sign == -1)
 	{
