@@ -36,10 +36,10 @@ char *flagformatingstrings(char *str, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *temp = NULL;
-	if (tempflag->mflag)
-		temp = stringmflag(str, temp, &tempflag);
 	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
-	temp = stringpercision(str, temp, &tempflag);
+		temp = stringpercision(str, temp, &tempflag);
+	if (tempflag->mflag)
+	temp = stringmflag(str, temp, &tempflag);
 	else if (tempflag->zero && tempflag->precision == 0)
 		temp = zeroflag(str, temp, &tempflag);
 	if (((tempflag->sign == -1) || (tempflag->sign > 0)) && (tempflag->conid > -1))

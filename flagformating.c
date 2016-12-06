@@ -6,15 +6,17 @@ char* percisionflag(char *str, char *temp, s_flags **flag)
 	char *test;
 	s_flags *tempflag;
 	tempflag = *flag;
-	size = ft_strlen(str);
-	if (str[0] == '-')
+	if (temp == NULL)
+		temp = ft_strdup((const char*)str);
+	size = ft_strlen(temp);
+	if (temp[0] == '-')
 	{
-		test = ft_strsub((char const*)str, 1, ft_strlen(str) - 1);
+		test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
 		size--;
 	}
 	else
 	{
-		test = ft_strsub((char const*)str, 0, ft_strlen(str));
+		test = ft_strsub((char const*)temp, 0, ft_strlen(temp));
 	}
 	temp = makespace((tempflag->precision - size), '0');
 	temp = betterjoin(temp,test);
@@ -117,6 +119,8 @@ char *mflag(char *str, char *temp, s_flags **flag)
 		buffer = makespace(size, ' ');
 		temp = betterjoin(temp,buffer);
 	}
+	if (tempflag->mflag == -1)
+		temp = betterjoin(temp," ");
 	return (temp);
 }
 
@@ -183,7 +187,7 @@ char *flagformating(char *str, s_flags **flag)
 		if (tempflag->mflag > 0)
 			tempflag->mflag = tempflag->mflag - 2;
 	}
-	if (tempflag->mflag)
+	if (tempflag->mflag || tempflag->mflag == -1)
 		temp = mflag(str, temp, &tempflag);
 	else if (tempflag->zero && tempflag->precision == 0)
 		temp = zeroflag(str, temp, &tempflag);
