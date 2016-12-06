@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/02 15:39:43 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/04 22:35:27 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int ft_printf(const char *format, ...)
 		}
 		if (flag->conid > -1)
 			g_gl[flag->conid](&args,&flag);
+
 		//putstring from flag->ret
 		ft_putstr(flag->ret);
 		flag->size = ft_strlen(flag->ret) + flag->size;

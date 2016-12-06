@@ -1,6 +1,6 @@
 CC =	gcc
 
-FLAG =	-c -Wall -Wextra -Werror
+FLAG =	-c -Wall -Wextra -Werror -O2
 
 NAME =	libftprintf.a
 
@@ -215,7 +215,7 @@ remove:
 comp:
 		gcc -Wall -Wextra -Werror $(NAME) main.c
 
-re: fclean all remove
+re: fclean all
 
 rec:  re comp
 

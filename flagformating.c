@@ -187,18 +187,21 @@ char *flagformating(char *str, s_flags **flag)
 		if (tempflag->mflag > 0)
 			tempflag->mflag = tempflag->mflag - 2;
 	}
-	if (tempflag->mflag || tempflag->mflag == -1)
+	if ((tempflag->precision > 0 || tempflag->precision == -1)
+	&& (tempflag->precision - ft_strlen(str) > 0))
+	temp = percisionflag(str, temp, &tempflag);
+	if ((tempflag->mflag == -1) || tempflag->mflag > tempflag->precision)
 		temp = mflag(str, temp, &tempflag);
 	else if (tempflag->zero && tempflag->precision == 0)
 		temp = zeroflag(str, temp, &tempflag);
 	if (tempflag->hash == -1 && (tempflag->conid == 6 || tempflag->conid == 7
-		|| tempflag->conid == 11 || tempflag->conid == 10))
+	|| tempflag->conid == 11 || tempflag->conid == 10))
 		temp = hashflag(str, temp, &tempflag);
-	if ((tempflag->precision > 0 || tempflag->precision == -1) && (tempflag->precision - ft_strlen(str) > 0))
-		temp = percisionflag(str, temp, &tempflag);
-	if (((tempflag->sign == -1) || (tempflag->sign > 0)) && (tempflag->conid > -1))
+	if (((tempflag->sign == -1) || (tempflag->sign > 0))
+	&& (tempflag->conid > -1))
 		temp = signflag(str, temp, &tempflag);
-	else if (((tempflag->space == -1) || (tempflag->space > 0)) && (ft_strcmp(str,"%") != 0))
+	else if (((tempflag->space == -1) || (tempflag->space > 0))
+	&& (ft_strcmp(str,"%") != 0))
 		temp = spaceflag(str, temp, &tempflag);
 	else if (tempflag->extra > 0)
 		temp = extraflag(str, temp, &tempflag);
