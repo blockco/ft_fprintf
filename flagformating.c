@@ -132,14 +132,24 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 	tempflag = *flag;
 	int size;
 	char *buffer;
+	char *save;
+
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	size = tempflag->zero - ft_strlen(temp);
+	if (temp[0] == '-')
+		save = ft_strsub(temp, 1, ft_strlen(temp) - 1);
+	else
+		save = ft_strdup(temp);
 	if (size > 0)
 	{
 		buffer = makespace(size, '0');
-		temp = betterjoin(buffer,temp);
+		save = betterjoin(buffer,save);
 	}
+	if (temp[0] == '-')
+		temp = betterjoin("-",save);
+	else
+		temp = ft_strdup(save);
 	return (temp);
 }
 
@@ -189,8 +199,7 @@ char *flagformating(char *str, s_flags **flag)
 		if (tempflag->mflag > 0)
 			tempflag->mflag = tempflag->mflag - 2;
 	}
-	if ((tempflag->precision > 0 || tempflag->precision == -1)
-	&& (tempflag->precision - ft_strlen(str) > 0))
+	if ((tempflag->precision > 0 || tempflag->precision == -1))
 	temp = percisionflag(str, temp, &tempflag);
 	if ((tempflag->mflag == -1) || tempflag->mflag > tempflag->precision)
 		temp = mflag(str, temp, &tempflag);

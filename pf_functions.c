@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/05 19:09:45 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/05 20:40:02 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -45,7 +45,6 @@ void pf_putnbr(va_list *args, s_flags **flag)
 {
 	char *str;
 	void *data;
-
 	s_flags *tempflag;
 	tempflag = *flag;
 	str = NULL;
@@ -66,7 +65,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	else if (tempflag->hh)
 		tempflag->ret = ft_itoa_base((signed char)data,10);
 	if (!checkoptions(&tempflag))
-		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
+		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 	}
 //X hex
 void pf_x_handle(va_list *args, s_flags **flag)
