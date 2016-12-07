@@ -95,7 +95,8 @@ char *spaceflag(char *str, char *temp, s_flags **flag)
 			temp = betterjoin("+",temp);
 		temp = betterjoin(buffer,temp);
 	}
-	else if (tempflag->space == -1 && (tempflag->isnegative == 0))
+	else if (tempflag->space == -1 && (tempflag->isnegative == 0) &&
+	tempflag->conid != 8 && tempflag->conid != 9)
 		temp = betterjoin(" ",temp);
 	else if (tempflag->sign == -1)
 	{
@@ -133,6 +134,7 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 	int size;
 	char *buffer;
 	char *save;
+	buffer = "";
 
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
@@ -143,7 +145,10 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 		save = ft_strdup(temp);
 	if (size > 0)
 	{
-		buffer = makespace(size, '0');
+		if (tempflag->precision == 0)
+			buffer = makespace(size, '0');
+		else if (tempflag->precision > 0)
+			buffer = makespace(size, ' ');
 		save = betterjoin(buffer,save);
 	}
 	if (temp[0] == '-')
@@ -203,7 +208,7 @@ char *flagformating(char *str, s_flags **flag)
 	temp = percisionflag(str, temp, &tempflag);
 	if ((tempflag->mflag == -1) || tempflag->mflag > tempflag->precision)
 		temp = mflag(str, temp, &tempflag);
-	else if (tempflag->zero && tempflag->precision == 0)
+	else if (tempflag->zero)
 		temp = zeroflag(str, temp, &tempflag);
 	if (tempflag->hash == -1 && (tempflag->conid == 6 || tempflag->conid == 7
 	|| tempflag->conid == 11 || tempflag->conid == 10))
