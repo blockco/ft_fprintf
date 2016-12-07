@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/05 20:40:02 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/06 17:51:53 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -24,6 +24,7 @@ void pf_putchar(va_list *args, s_flags **flag)
 	tempflag->ret = charadder(tempflag->ret, 'a');
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
+
 	hold = ft_strchr(tempflag->ret, 'a');
 	hold[0] = c;
 	if (c == 0)
@@ -195,6 +196,7 @@ void pf_u_handle(va_list *args, s_flags **flag)
 		tempflag->ret = ft_itoa_baselowu((unsigned short)data,10);
 	else if (tempflag->hh)
 		tempflag->ret = ft_itoa_baselowu((unsigned char)data,10);
+	tempflag->sign = 0;
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 }

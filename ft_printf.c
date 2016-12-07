@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/05 20:38:25 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/06 17:32:30 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int ft_printf(const char *format, ...)
 				flag->ret = charadder(flag->ret, format[findex]);
 				findex++;
 			}
-			flag->ret = flagformating(flag->ret, &flag);
+			flag->ret = flagformatingstrings(flag->ret, &flag);
 			ft_putstr(flag->ret);
 			return (ft_strlen(flag->ret));
 		}
