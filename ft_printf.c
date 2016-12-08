@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/06 17:32:30 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 22:12:48 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void (*g_gl[14])(va_list *ptr, s_flags **flag) =
 	&pf_o_handle, 	//6			o
 	&pf_oup_handle, //7			O
 	&pf_u_handle,	//8			u
-	&pf_u_handle, 	//9			U
+	&pf_uup_handle, //9			U
 	&pf_xlow_handle,//10		x
 	&pf_x_handle,	//11		X
 	&pf_putchar, 	//12		c

@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/02 15:04:12 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 22:14:16 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include "./libft/libft.h"
 
 typedef	struct s_flags
@@ -51,10 +52,8 @@ void 	pf_xlow_handle(va_list *args, s_flags **flag);
 void 	pf_o_handle(va_list *args, s_flags **flag);
 void 	pf_oup_handle(va_list *args, s_flags **flag);
 void 	pf_p_handle(va_list *args, s_flags **flag);
-void	setflags(s_flags **flag);
-void	setsymb(s_flags **flag, int *findex, const char *format);
-void	findflags(s_flags **flag, int *findex, const char *format);
 void	pf_u_handle(va_list *args, s_flags **flag);
+void pf_uup_handle(va_list *args, s_flags **flag);
 //extra functions
 int findsize(uintmax_t value, int base);
 char *betterjoin(char *first, char *second);
@@ -68,6 +67,9 @@ char *ft_itoa_baselowuint(uintmax_t value, int base);
 char *ft_itoa_baselowu(uintmax_t value, uintmax_t base);
 char *ft_itoa_baseu(uintmax_t value, uintmax_t base);
 //flag handlers
+void	setflags(s_flags **flag);
+void	setsymb(s_flags **flag, int *findex, const char *format);
+void	findflags(s_flags **flag, int *findex, const char *format);
 int checkzeroflag(s_flags **flag);
 int findprecision(const char *format, int *findex);
 int findprecisionspace(const char *format, int *findex);

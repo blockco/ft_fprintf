@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/06 17:51:53 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 22:18:13 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -178,14 +178,14 @@ void pf_p_handle(va_list *args, s_flags **flag)
 //u
 void pf_u_handle(va_list *args, s_flags **flag)
 {
-	void* data;
+	void *data;
 	s_flags *tempflag;
 	tempflag = *flag;
 	data = va_arg(*args,void*);
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baselowu((unsigned int)data,10);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_baselow((ssize_t)data,10);
+		tempflag->ret = ft_itoa_baselow((size_t)data,10);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baselowu((uintmax_t)data,10);
 	else if (tempflag->ll)
@@ -197,6 +197,17 @@ void pf_u_handle(va_list *args, s_flags **flag)
 	else if (tempflag->hh)
 		tempflag->ret = ft_itoa_baselowu((unsigned char)data,10);
 	tempflag->sign = 0;
+	if (!checkoptions(&tempflag))
+		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
+}
+//U
+void pf_uup_handle(va_list *args, s_flags **flag)
+{
+	void *data;
+	s_flags *tempflag;
+	tempflag = *flag;
+	data = va_arg(*args,void*);
+	tempflag->ret = ft_itoa_baselowu((unsigned long)data,10);
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 }
