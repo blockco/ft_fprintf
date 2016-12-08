@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/07 22:27:10 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 23:20:51 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -208,6 +208,17 @@ void pf_uup_handle(va_list *args, s_flags **flag)
 	tempflag = *flag;
 	data = va_arg(*args,void*);
 	tempflag->ret = ft_itoa_baselowu((unsigned long)data,10);
+	if (!checkoptions(&tempflag))
+		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
+}
+//D
+void pf_dup_handle(va_list *args, s_flags **flag)
+{
+	void *data;
+	s_flags *tempflag;
+	tempflag = *flag;
+	data = va_arg(*args,void*);
+	tempflag->ret = ft_itoa_baselowu((long)data,10);
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 }

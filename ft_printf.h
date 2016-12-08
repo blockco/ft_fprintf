@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/07 22:25:15 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 23:21:12 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void 	pf_oup_handle(va_list *args, s_flags **flag);
 void 	pf_p_handle(va_list *args, s_flags **flag);
 void	pf_u_handle(va_list *args, s_flags **flag);
 void pf_uup_handle(va_list *args, s_flags **flag);
+void pf_dup_handle(va_list *args, s_flags **flag);
 //extra functions
 int findsize(uintmax_t value, int base);
 char *betterjoin(char *first, char *second);

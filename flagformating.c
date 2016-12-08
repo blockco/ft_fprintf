@@ -6,6 +6,7 @@ char* percisionflag(char *str, char *temp, s_flags **flag)
 	char *test;
 	s_flags *tempflag;
 	tempflag = *flag;
+	//ft_putendl("here");
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	if (tempflag->precision == -1)
@@ -80,9 +81,9 @@ char *spaceflag(char *str, char *temp, s_flags **flag)
 	char *buffer;
 	int size;
 	char *test;
-
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
+	buffer = "";
 	if(tempflag->space > 0)
 	{
 		size = ft_strlen(temp);
@@ -92,14 +93,13 @@ char *spaceflag(char *str, char *temp, s_flags **flag)
 			test = ft_strsub((char const*)str, 0, ft_strlen(temp));
 		size++;
 		if ((tempflag->space - size) > 0)
-			buffer = makespace((tempflag->sign - size), ' ');
-		else
-			buffer = "";
-		if (str[0] == '-')
-			temp = betterjoin("-",temp);
-		else
-			temp = betterjoin("+",temp);
-		temp = betterjoin(buffer,temp);
+		{
+			buffer = makespace((tempflag->space - size), ' ');
+			if(str[0] == '-')
+				temp = betterjoin("-",temp);
+			temp = betterjoin(buffer,temp);
+			return temp;
+		}
 	}
 	else if (tempflag->space == -1 && (tempflag->isnegative == 0) &&
 	tempflag->conid != 8 && tempflag->conid != 9)
@@ -108,9 +108,10 @@ char *spaceflag(char *str, char *temp, s_flags **flag)
 	{
 		if (tempflag->isnegative)
 			temp = betterjoin("-",temp);
-		else
+		else if (tempflag->space == -1)
 			temp = betterjoin(" ",temp);
 	}
+	temp = betterjoin(buffer,temp);
 	return (temp);
 }
 
@@ -201,7 +202,6 @@ char *flagformating(char *str, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *temp = NULL;
-	//ft_putendl(str);
 	if (ft_atoi(str) == 0 && tempflag->precision == -1)
 	{
 		tempflag->precision = -2;
