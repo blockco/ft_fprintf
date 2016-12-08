@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/07 22:18:13 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 22:27:10 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -58,7 +58,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baseu((uintmax_t)data,10);
 	else if (tempflag->ll)
-		tempflag->ret = ft_itoa_base((long long)data,10);
+		tempflag->ret = ft_itoa_base((long)data,10);
 	else if (tempflag->l)
 		tempflag->ret = ft_itoa_base((long)data,10);
 	else if (tempflag->h)

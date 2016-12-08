@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/07 22:14:16 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/07 22:25:15 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ char *ft_itoa_baseu(uintmax_t value, uintmax_t base);
 void	setflags(s_flags **flag);
 void	setsymb(s_flags **flag, int *findex, const char *format);
 void	findflags(s_flags **flag, int *findex, const char *format);
-int checkzeroflag(s_flags **flag);
-int findprecision(const char *format, int *findex);
-int findprecisionspace(const char *format, int *findex);
-int findprecisionextra(const char *format, int *findex);
-int checkoptions(s_flags **flag);
-char *flagformatingstrings(char *str, s_flags **flag);
+int 	checkzeroflag(s_flags **flag);
+int 	findprecision(const char *format, int *findex);
+int 	findprecisionspace(const char *format, int *findex);
+int 	findprecisionextra(const char *format, int *findex);
+int 	checkoptions(s_flags **flag);
+char 	*flagformatingstrings(char *str, s_flags **flag);
 //handle options
 int 	findprecision(const char *format, int *findex);
 char 	*flagformating(char *str, s_flags **flag);

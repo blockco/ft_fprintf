@@ -8,6 +8,10 @@ char* percisionflag(char *str, char *temp, s_flags **flag)
 	tempflag = *flag;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
+	if (tempflag->precision == -1)
+			return (temp);
+	if (tempflag->precision == -1 && ft_strcmp("0", temp) == 0)
+		return "";
 	size = ft_strlen(temp);
 	if (temp[0] == '-')
 	{
@@ -22,8 +26,6 @@ char* percisionflag(char *str, char *temp, s_flags **flag)
 	temp = betterjoin(temp,test);
 	if (str[0] == '-')
 		temp = betterjoin("-",temp);
-	if (tempflag->precision == -1)
-		temp = "";
 	return (temp);
 }
 
@@ -45,17 +47,21 @@ char *signflag(char *str, char *temp, s_flags **flag)
 			temp = ft_strsub((char const*)str, 0, ft_strlen(temp));
 			size++;
 		}
-		if ((tempflag->sign - size) > 0 && tempflag->zero == 0)
+		if ((tempflag->sign - size) > 0 && (tempflag->zero == 0 || (tempflag->precision > 0 || tempflag->precision == -1)))
 			buffer = makespace((tempflag->sign - size), ' ');
 		else if (tempflag->zero == -1)
+		{
 			buffer = makespace((tempflag->sign - size), '0');
+			temp = betterjoin(buffer,temp);
+			buffer = "";
+		}
 		else
 			buffer = "";
-		temp = betterjoin(buffer,temp);
 		if (str[0] == '-')
 			temp = betterjoin("-",temp);
 		else
 			temp = betterjoin("+",temp);
+		temp = betterjoin(buffer,temp);
 	}
 	else if (tempflag->sign == -1)
 	{
@@ -195,6 +201,12 @@ char *flagformating(char *str, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *temp = NULL;
+	//ft_putendl(str);
+	if (ft_atoi(str) == 0 && tempflag->precision == -1)
+	{
+		tempflag->precision = -2;
+		temp = "";
+	}
 	if (tempflag->hash == -1 && (tempflag->zero > 0 || tempflag->mflag > 0))
 	{
 		if (tempflag->zero > 1)
@@ -205,7 +217,7 @@ char *flagformating(char *str, s_flags **flag)
 			tempflag->mflag = tempflag->mflag - 2;
 	}
 	if ((tempflag->precision > 0 || tempflag->precision == -1))
-	temp = percisionflag(str, temp, &tempflag);
+		temp = percisionflag(str, temp, &tempflag);
 	if ((tempflag->mflag == -1) || tempflag->mflag > tempflag->precision)
 		temp = mflag(str, temp, &tempflag);
 	else if (tempflag->zero)
