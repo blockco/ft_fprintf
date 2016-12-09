@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/07 23:20:51 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/08 19:33:22 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -41,6 +41,22 @@ void pf_putstr(va_list *args, s_flags **flag)
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //i,d
 void pf_putnbr(va_list *args, s_flags **flag)
 {
@@ -54,7 +70,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_base((int)data,10);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_base((ssize_t)data,10);
+		tempflag->ret = ft_itoa_baseu((ssize_t)data,10);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baseu((uintmax_t)data,10);
 	else if (tempflag->ll)
@@ -65,9 +81,34 @@ void pf_putnbr(va_list *args, s_flags **flag)
 		tempflag->ret = ft_itoa_base((short)data,10);
 	else if (tempflag->hh)
 		tempflag->ret = ft_itoa_base((signed char)data,10);
-	if (!checkoptions(&tempflag))
+	if (!checkoptions(&tempflag) || tempflag->isnegative == 1)
 		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //X hex
 void pf_x_handle(va_list *args, s_flags **flag)
 {
@@ -148,7 +189,7 @@ void pf_oup_handle(va_list *args, s_flags **flag)
 	tempflag = *flag;
 	data = va_arg(*args,void*);
 	if (checkzeroflag(&tempflag) == 1)
-		tempflag->ret = ft_itoa_baselow((unsigned int)data,8);
+		tempflag->ret = ft_itoa_baselowu((unsigned long int)data,8);
 	else if (tempflag->zflag)
 		tempflag->ret = ft_itoa_baselow((ssize_t)data,8);
 	else if (tempflag->j)

@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/07 23:21:12 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/08 19:11:20 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void pf_dup_handle(va_list *args, s_flags **flag);
 int findsize(uintmax_t value, int base);
 char *betterjoin(char *first, char *second);
 char *charadder(char *str, char c);
+char *ft_itoa_baseint(intmax_t value, int base);
 //handle
 uintmax_t		ft_pow(uintmax_t nb, int pow);
 char *ft_itoa_base(ssize_t value, int base);
@@ -86,9 +87,9 @@ char*	percisionflag(char *str, char *temp, s_flags **flag);
 char 	*signflag(char *str, char *temp, s_flags **flag);
 char	*spaceflag(char *str, char *temp, s_flags **flag);
 char	*zeroflag(char *str, char *temp, s_flags **flag);
-char *hashflag(char *str, char *temp, s_flags **flag);
-char *extraflag(char *str, char *temp, s_flags **flag);
-char *mflag(char *str, char *temp, s_flags **flag);
+char 	*hashflag(char *str, char *temp, s_flags **flag);
+char 	*extraflag(char *str, char *temp, s_flags **flag);
+char	*mflag(char *str, char *temp, s_flags **flag);
 //handle Strings
 
 //printf

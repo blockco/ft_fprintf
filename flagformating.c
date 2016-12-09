@@ -202,6 +202,8 @@ char *flagformating(char *str, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *temp = NULL;
+	if (tempflag->isnegative == 1 && tempflag->ret[0] != '-')
+		temp = betterjoin("-",tempflag->ret);
 	if (ft_atoi(str) == 0 && tempflag->precision == -1)
 	{
 		tempflag->precision = -2;
