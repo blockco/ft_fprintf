@@ -45,7 +45,7 @@ char *signflag(char *str, char *temp, s_flags **flag)
 			temp = ft_strsub((char const*)temp, 1, ft_strlen(temp));
 		else
 		{
-			temp = ft_strsub((char const*)str, 0, ft_strlen(temp));
+			temp = ft_strsub((char const*)temp, 0, ft_strlen(temp));
 			size++;
 		}
 		if ((tempflag->sign - size) > 0 && (tempflag->zero == 0 || (tempflag->precision > 0 || tempflag->precision == -1)))
@@ -66,9 +66,9 @@ char *signflag(char *str, char *temp, s_flags **flag)
 	}
 	else if (tempflag->sign == -1)
 	{
-		if (tempflag->isnegative && temp[0] != '-')
+		if (str[0] == '-' && temp[0] != '-')
 			temp = betterjoin("-",temp);
-		else if (!tempflag->isnegative)
+		else if (str[0] != '-')
 			temp = betterjoin("+",temp);
 	}
 	return (temp);
@@ -102,13 +102,16 @@ char *spaceflag(char *str, char *temp, s_flags **flag)
 		}
 	}
 	else if (tempflag->space == -1 && (tempflag->isnegative == 0) &&
-	tempflag->conid != 8 && tempflag->conid != 9)
+	tempflag->conid != 8 && tempflag->conid != 9 && temp[0] != '-')
+	{
 		temp = betterjoin(" ",temp);
-	else if (tempflag->sign == -1)
+	}
+	else if (tempflag->space == -1)
 	{
 		if (tempflag->isnegative)
 			temp = betterjoin("-",temp);
-		else if (tempflag->space == -1)
+		else if (tempflag->space == -1 && temp[0] != '-'&&
+		tempflag->conid != 8 && tempflag->conid != 9)
 			temp = betterjoin(" ",temp);
 	}
 	temp = betterjoin(buffer,temp);

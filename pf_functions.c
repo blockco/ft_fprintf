@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/09 00:04:20 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/09 02:59:13 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -23,9 +23,8 @@ void pf_putchar(va_list *args, s_flags **flag)
 	c = va_arg(*args,int);
 	tempflag->ret = "";
 	tempflag->ret = charadder(tempflag->ret, 'a');
-	if (!checkoptions(&tempflag))
+	if (!checkoptions(&tempflag) && c != 0)
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
-
 	hold = ft_strchr(tempflag->ret, 'a');
 	hold[0] = c;
 	if (c == 0)
@@ -34,18 +33,21 @@ void pf_putchar(va_list *args, s_flags **flag)
 //s
 void pf_putstr(va_list *args, s_flags **flag)
 {
-	char *str;
+	void *data;
 	s_flags *tempflag;
 	tempflag = *flag;
-	str = va_arg(*args,char*);
-	tempflag->ret = ft_strdup(str);
+	data = va_arg(*args,void*);
+	if (data == NULL)
+	{
+		tempflag->size = tempflag->size + 6;
+		ft_putstr("(null)");
+		tempflag->ret = "";
+	}
+	else
+		tempflag->ret = ft_strdup((char*)data);
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
 }
-
-
-
-
 
 
 
@@ -75,7 +77,7 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baseu((uintmax_t)data,10);
 	else if (tempflag->ll)
-		tempflag->ret = ft_itoa_base((long)data,10);
+		tempflag->ret = ft_itoa_baseu((long)data,10);
 	else if (tempflag->l)
 		tempflag->ret = ft_itoa_base((long)data,10);
 	else if (tempflag->h)
