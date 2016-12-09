@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/08 19:33:22 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/09 00:04:20 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -21,6 +21,7 @@ void pf_putchar(va_list *args, s_flags **flag)
 	tempflag = *flag;
 	//unsigned char temp;
 	c = va_arg(*args,int);
+	tempflag->ret = "";
 	tempflag->ret = charadder(tempflag->ret, 'a');
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
@@ -119,7 +120,7 @@ void pf_x_handle(va_list *args, s_flags **flag)
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baseu((unsigned int)data,16);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_base((ssize_t)data,16);
+		tempflag->ret = ft_itoa_baseu((ssize_t)data,16);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baseu((uintmax_t)data,16);
 	else if (tempflag->ll)
@@ -143,7 +144,7 @@ void pf_xlow_handle(va_list *args, s_flags **flag)
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baselowu((unsigned int)data,16);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_baselow((ssize_t)data,16);
+		tempflag->ret = ft_itoa_baselowu((ssize_t)data,16);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baselowu((uintmax_t)data,16);
 	else if (tempflag->ll)
@@ -167,7 +168,7 @@ void pf_o_handle(va_list *args, s_flags **flag)
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baselowu((unsigned int)data,8);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_baselow((ssize_t)data,8);
+		tempflag->ret = ft_itoa_baselowu((ssize_t)data,8);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baselowu((uintmax_t)data,8);
 	else if (tempflag->ll)
@@ -191,7 +192,7 @@ void pf_oup_handle(va_list *args, s_flags **flag)
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baselowu((unsigned long int)data,8);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_baselow((ssize_t)data,8);
+		tempflag->ret = ft_itoa_baselowu((ssize_t)data,8);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baselowu((uintmax_t)data,8);
 	else if (tempflag->ll)
@@ -201,7 +202,7 @@ void pf_oup_handle(va_list *args, s_flags **flag)
 	else if (tempflag->h)
 		tempflag->ret = ft_itoa_baselowu((unsigned short)data,8);
 	else if (tempflag->hh)
-		tempflag->ret = ft_itoa_baselowu((unsigned char)data,8);
+		tempflag->ret = ft_itoa_baselowu((unsigned short)data,8);
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 }
@@ -226,7 +227,7 @@ void pf_u_handle(va_list *args, s_flags **flag)
 	if (checkzeroflag(&tempflag) == 1)
 		tempflag->ret = ft_itoa_baselowu((unsigned int)data,10);
 	else if (tempflag->zflag)
-		tempflag->ret = ft_itoa_baselow((size_t)data,10);
+		tempflag->ret = ft_itoa_baselowu((size_t)data,10);
 	else if (tempflag->j)
 		tempflag->ret = ft_itoa_baselowu((uintmax_t)data,10);
 	else if (tempflag->ll)

@@ -213,10 +213,10 @@ remove:
 		@/bin/rm -f $(OBJS) $(OBJL) $(RMOBJ) $(OBJL1)
 
 comp:
-		gcc -Wall -Wextra -Werror $(NAME) main.c
+		gcc $(NAME) main.c
 
 re: fclean all
 
-rec:  re comp
+rec:  re comp remove
 
 .PHONY: all clean fclean re remove comp
