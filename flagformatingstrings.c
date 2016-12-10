@@ -6,6 +6,8 @@ char *stringpercision(char *str, char *temp, s_flags **flag)
 	tempflag = *flag;
 	if (temp == NULL)
 	temp = ft_strdup((const char*)str);
+	if (tempflag->precision == -1)
+		return ("");
 	if ((size_t)tempflag->precision < ft_strlen(temp))
 	temp = ft_strsub(temp, 0, tempflag->precision);
 	return temp;
@@ -54,7 +56,7 @@ char *flagformatingstrings(char *str, s_flags **flag)
 	s_flags *tempflag;
 	tempflag = *flag;
 	char *temp = NULL;
-	if ((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0))
+	if (((tempflag->precision > 0) && (tempflag->precision - ft_strlen(str) > 0)))
 		temp = stringpercision(str, temp, &tempflag);
 	if (tempflag->mflag)
 	temp = stringmflag(str, temp, &tempflag);

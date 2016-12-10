@@ -37,6 +37,7 @@ char *signflag(char *str, char *temp, s_flags **flag)
 	char *buffer;
 	int size;
 	int zero;
+	zero = 0;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	if (ft_strcmp(temp,"0") == 0)
@@ -61,13 +62,15 @@ char *signflag(char *str, char *temp, s_flags **flag)
 		}
 		else
 			buffer = "";
-		if (str[0] == '-')
+		if (str[0] == '-' && zero == 0 && tempflag->conid != 6 && tempflag->conid != 7
+		&& tempflag->conid != 0 && tempflag->conid != 1)
 			temp = betterjoin("-",temp);
-		else
+		else if (zero == 0)
 			temp = betterjoin("+",temp);
 		temp = betterjoin(buffer,temp);
 	}
-	else if (tempflag->sign == -1)
+	else if (tempflag->sign == -1 && zero == 0 && tempflag->conid != 6 && tempflag->conid != 7
+	&& tempflag->conid != 0 && tempflag->conid != 1)
 	{
 		if (str[0] == '-' && temp[0] != '-')
 			temp = betterjoin("-",temp);

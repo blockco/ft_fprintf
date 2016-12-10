@@ -38,13 +38,17 @@ char *ft_itoa_baselow(ssize_t value, intmax_t base)
 char *ft_itoa_base(ssize_t value, int base)
 {
 	char hex[16] = "0123456789ABCDEF";
-	intmax_t n = value;
+	intmax_t n = (intmax_t)value;
 	intmax_t size;
 	char *ret;
+	if (n < -9223372036854775807)
+		return "-9223372036854775808";
 	if (value == 0)
 		return ("0");
 	if (value < 0)
-		n = -1 * n;
+	{
+		n = (-1 * n);
+	}
 	size = findsize(n, base);
 	if (value < 0 && base == 10)
 		size++;

@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/09 18:40:14 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/09 21:51:15 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -28,7 +28,11 @@ void pf_putchar(va_list *args, s_flags **flag)
 	hold = ft_strchr(tempflag->ret, 'a');
 	hold[0] = c;
 	if (c == 0)
+	{
+		tempflag->ret = "";
+		ft_putchar(0);
 		tempflag->size = tempflag->size + 1;
+	}
 }
 //s
 void pf_putstr(va_list *args, s_flags **flag)
@@ -41,7 +45,7 @@ void pf_putstr(va_list *args, s_flags **flag)
 	{
 		tempflag->size = tempflag->size + 6;
 		ft_putstr("(null)");
-		tempflag->ret = "";
+		return;
 	}
 	else
 		tempflag->ret = ft_strdup((char*)data);
@@ -65,9 +69,9 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	else if (tempflag->zflag)
 		tempflag->ret = ft_itoa_baseu((ssize_t)data,10);
 	else if (tempflag->j)
-		tempflag->ret = ft_itoa_baseu((uintmax_t)data,10);
+		tempflag->ret = ft_itoa_baseu((intmax_t)data,10);
 	else if (tempflag->ll)
-		tempflag->ret = ft_itoa_baseu((long)data,10);
+		tempflag->ret = ft_itoa_base((long long)data,10);
 	else if (tempflag->l)
 		tempflag->ret = ft_itoa_base((long)data,10);
 	else if (tempflag->h)
