@@ -36,8 +36,11 @@ char *signflag(char *str, char *temp, s_flags **flag)
 	tempflag = *flag;
 	char *buffer;
 	int size;
+	int zero;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
+	if (ft_strcmp(temp,"0") == 0)
+		zero = 1;
 	if(tempflag->sign > 0)
 	{
 		size = ft_strlen(temp);
@@ -146,6 +149,8 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 	char *save;
 	buffer = "";
 
+	if (tempflag->sign == -1 || tempflag->space == -1)
+		tempflag->zero--;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	size = tempflag->zero - ft_strlen(temp);

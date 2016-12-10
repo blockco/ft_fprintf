@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/09 02:59:13 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/09 18:40:14 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -22,8 +22,8 @@ void pf_putchar(va_list *args, s_flags **flag)
 	//unsigned char temp;
 	c = va_arg(*args,int);
 	tempflag->ret = "";
-	tempflag->ret = charadder(tempflag->ret, 'a');
-	if (!checkoptions(&tempflag) && c != 0)
+	tempflag->ret = charadder(tempflag->ret,'a');
+	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
 	hold = ft_strchr(tempflag->ret, 'a');
 	hold[0] = c;
@@ -48,16 +48,6 @@ void pf_putstr(va_list *args, s_flags **flag)
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
 }
-
-
-
-
-
-
-
-
-
-
 
 
 //i,d
@@ -87,30 +77,6 @@ void pf_putnbr(va_list *args, s_flags **flag)
 	if (!checkoptions(&tempflag) || tempflag->isnegative == 1)
 		tempflag->ret = (char*)flagformating(tempflag->ret, &tempflag);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //X hex
 void pf_x_handle(va_list *args, s_flags **flag)
