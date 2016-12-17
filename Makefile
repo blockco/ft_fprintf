@@ -15,6 +15,15 @@ SRCS =	ft_printf.c \
 		flagfunctions.c \
 		flagformating.c \
 		flagformatingstrings.c \
+		percdealer.c \
+		signflag.c \
+		zerohash.c \
+		flagstrsplit.c \
+		flagfunextra.c \
+		flagextra.c \
+		pf_extramore.c \
+		pf_funmore.c \
+
 
 SRCSL =	libft/ft_putchar.c \
 		libft/ft_putstr.c \
@@ -214,6 +223,8 @@ remove:
 
 comp:
 		gcc $(NAME) main.c
+compde:
+		gcc $(NAME) -g main.c
 
 re: fclean all
 

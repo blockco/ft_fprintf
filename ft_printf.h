@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/10 15:29:27 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/15 23:21:11 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/16 23:04:09 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,14 @@ char	*zeroflag(char *str, char *temp, s_flags **flag);
 char 	*hashflag(char *str, char *temp, s_flags **flag);
 char 	*extraflag(char *str, char *temp, s_flags **flag);
 char	*mflag(char *str, char *temp, s_flags **flag);
+char *stringpercision(char *str, char *temp, s_flags **flag);
+char *stringmflag(char *str, char *temp, s_flags **flag);
+char* strspace(char *str, char *temp, s_flags **flag);
 //handle Strings
 char* percdealer(s_flags **flag);
 //printf
 int ft_printf(const char *format, ...);
+char* zerostr(char *str, char *temp, s_flags **flag);
+char* signflagstr(char *str, char *temp, s_flags **flag);
+int findhash(const char *format, int *findex);
 #endif
