@@ -30,7 +30,7 @@ int findprecision(const char *format, int *findex)
 
 	temp = *findex;
 	temp++;
-	while(format[temp] >= '0' && format[temp] <= '9')
+	while(format[temp] >= '1' && format[temp] <= '9')
 	{
 
 		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')

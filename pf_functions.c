@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 16:13:53 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/09 21:51:15 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/16 19:54:41 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -29,11 +29,23 @@ void pf_putchar(va_list *args, s_flags **flag)
 	hold[0] = c;
 	if (c == 0)
 	{
-		tempflag->ret = "";
 		ft_putchar(0);
 		tempflag->size = tempflag->size + 1;
 	}
 }
+//c
+// void pf_putchar(va_list *args, s_flags **flag)
+// {
+// 	int c;
+// 	s_flags *tempflag;
+// 	tempflag = *flag;
+// 	char *hold;
+// 	//unsigned char temp;
+// 	c = va_arg(*args,int);
+// 	tempflag->ret = percdealer(&tempflag);
+// 	hold = ft_strchr(tempflag->ret, '%');
+// 	hold[0] = c;
+// }
 //s
 void pf_putstr(va_list *args, s_flags **flag)
 {
@@ -51,6 +63,14 @@ void pf_putstr(va_list *args, s_flags **flag)
 		tempflag->ret = ft_strdup((char*)data);
 	if (!checkoptions(&tempflag))
 		tempflag->ret = (char*)flagformatingstrings(tempflag->ret, &tempflag);
+
+	//ft_putendl("here");
+	// ft_putendl("size");
+	// ft_putnbr(tempflag->size);
+	// ft_putendl("size");
+	// ft_putnbr(ft_strlen(tempflag->ret));
+	// ft_putendl("size");
+	// ft_putendl("size");
 }
 
 

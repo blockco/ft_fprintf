@@ -103,6 +103,8 @@ char *spaceflag(char *str, char *temp, s_flags **flag)
 			buffer = makespace((tempflag->space - size), ' ');
 			if(str[0] == '-')
 				temp = betterjoin("-",temp);
+			else
+				temp = betterjoin(" ",temp);
 			temp = betterjoin(buffer,temp);
 			return temp;
 		}
@@ -138,8 +140,6 @@ char *mflag(char *str, char *temp, s_flags **flag)
 		buffer = makespace(size, ' ');
 		temp = betterjoin(temp,buffer);
 	}
-	if (tempflag->mflag == -1)
-		temp = betterjoin(temp," ");
 	return (temp);
 }
 
