@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_extra.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpassafa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 21:47:44 by rpassafa          #+#    #+#             */
+/*   Updated: 2016/12/17 21:47:45 by rpassafa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 uintmax_t		ft_pow(uintmax_t nb, int pow)
@@ -8,7 +20,7 @@ uintmax_t		ft_pow(uintmax_t nb, int pow)
 		return (nb * ft_pow(nb, pow - 1));
 }
 
-char	*ft_itoa_baselow(ssize_t value, intmax_t base)
+char			*ft_itoa_baselow(ssize_t value, intmax_t base)
 {
 	char		*hex;
 	intmax_t	n;

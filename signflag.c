@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signflag.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 21:44:44 by rpassafa          #+#    #+#             */
+/*   Updated: 2016/12/17 22:02:04 by rpassafa         ###   ########.us       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		checkzeroif(t_flags *tempflag, int size, char **buffer)
@@ -73,18 +85,18 @@ char	*signflag(char *str, char *temp, t_flags **flag)
 	return (temp);
 }
 
-char	*spaceextra(char *str, char *temp, t_flags *tempflag, char *test)
+char	*spaceextra(char *str, char *temp, t_flags *tempflag, char *t)
 {
 	int		size;
 	char	*buffer;
 
-	test = NULL;
+	t = NULL;
 	size = 0;
 	size = ft_strlen(temp);
 	if (str[0] == '-')
-		test = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
+		t = ft_strsub((char const*)temp, 1, ft_strlen(temp) - 1);
 	else
-		test = ft_strsub((char const*)str, 0, ft_strlen(temp));
+		t = ft_strsub((char const*)str, 0, ft_strlen(temp));
 	size++;
 	if ((tempflag->space - size) > 0)
 	{
@@ -96,33 +108,5 @@ char	*spaceextra(char *str, char *temp, t_flags *tempflag, char *test)
 		temp = betterjoin(buffer, temp);
 		return (temp);
 	}
-	return (test);
-}
-
-char	*spaceflag(char *str, char *temp, t_flags **flag)
-{
-	t_flags *tempflag;
-	char	*buffer;
-
-	tempflag = *flag;
-	if (temp == NULL)
-		temp = ft_strdup((const char*)str);
-	buffer = "";
-	if (tempflag->space > 0)
-		temp = spaceextra(str, temp, tempflag, NULL);
-	else if (tempflag->space == -1 && (tempflag->isnegative == 0) &&
-	tempflag->conid != 8 && tempflag->conid != 9 && temp[0] != '-')
-	{
-		temp = betterjoin(" ", temp);
-	}
-	else if (tempflag->space == -1)
-	{
-		if (tempflag->isnegative)
-			temp = betterjoin("-", temp);
-		else if (tempflag->space == -1 && temp[0] != '-' &&
-		tempflag->conid != 8 && tempflag->conid != 9)
-			temp = betterjoin(" ", temp);
-	}
-	temp = betterjoin(buffer, temp);
-	return (temp);
+	return (t);
 }

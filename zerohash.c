@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   zerohash.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpassafa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 21:51:26 by rpassafa          #+#    #+#             */
+/*   Updated: 2016/12/17 21:51:27 by rpassafa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 char	*zeroflagextra(t_flags *tempflag, int size, char *buffer, char *save)
@@ -70,5 +82,33 @@ char	*extraflag(char *str, char *temp, t_flags **flag)
 		buffer = makespace(tempflag->extra - ft_strlen(temp), ' ');
 		temp = betterjoin(buffer, temp);
 	}
+	return (temp);
+}
+
+char	*spaceflag(char *str, char *temp, t_flags **flag)
+{
+	t_flags *tempflag;
+	char	*buffer;
+
+	tempflag = *flag;
+	if (temp == NULL)
+		temp = ft_strdup((const char*)str);
+	buffer = "";
+	if (tempflag->space > 0)
+		temp = spaceextra(str, temp, tempflag, NULL);
+	else if (tempflag->space == -1 && (tempflag->isnegative == 0) &&
+	tempflag->conid != 8 && tempflag->conid != 9 && temp[0] != '-')
+	{
+		temp = betterjoin(" ", temp);
+	}
+	else if (tempflag->space == -1)
+	{
+		if (tempflag->isnegative)
+			temp = betterjoin("-", temp);
+		else if (tempflag->space == -1 && temp[0] != '-' &&
+		tempflag->conid != 8 && tempflag->conid != 9)
+			temp = betterjoin(" ", temp);
+	}
+	temp = betterjoin(buffer, temp);
 	return (temp);
 }

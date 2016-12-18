@@ -6,7 +6,7 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 01:25:16 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/17 01:25:37 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/17 22:28:18 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,25 @@ void	setsymb(t_flags **flag, int *findex, const char *format)
 	*flag = tempflag;
 }
 
+int		findflagmore(char *format, int *findex, t_flags **flag)
+{
+	int		temp;
+	t_flags *tempflag;
+
+	tempflag = *flag;
+	temp = *findex;
+	if (format[temp] == 'h')
+		tempflag->h = 1;
+	else if (format[temp] == 'l')
+		tempflag->l = 1;
+	else if (format[temp] == 'j')
+		tempflag->j = 1;
+	else if (format[temp] == 'z')
+		tempflag->zflag = 1;
+	temp++;
+	return (temp);
+}
+
 void	findflags(t_flags **flag, int *findex, const char *format)
 {
 	int		temp;
@@ -78,15 +97,7 @@ void	findflags(t_flags **flag, int *findex, const char *format)
 	else if (format[temp] == 'h' || format[temp] == 'l' ||
 			format[temp] == 'j' || format[temp] == 'z')
 	{
-		if (format[temp] == 'h')
-			tempflag->h = 1;
-		else if (format[temp] == 'l')
-			tempflag->l = 1;
-		else if (format[temp] == 'j')
-			tempflag->j = 1;
-		else if (format[temp] == 'z')
-			tempflag->zflag = 1;
-		temp++;
+		temp = findflagmore((char*)format, findex, &tempflag);
 	}
 	*findex = temp;
 	*flag = tempflag;
