@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flagfunextra.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpassafa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 02:14:26 by rpassafa          #+#    #+#             */
+/*   Updated: 2016/12/17 02:14:28 by rpassafa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-char *ft_stradd(char* append, char *str)
+char	*ft_stradd(char *append, char *str)
 {
-	char *ret;
-	int i;
-	int j;
+	char	*ret;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -30,26 +42,26 @@ char *ft_stradd(char* append, char *str)
 
 char	*makespace(int size, int c)
 {
-	char *ret;
-	int i;
+	char	*ret;
+	int		i;
+
 	if (size < 0)
 		return ("");
 	i = 0;
-	ret = (char*)malloc(size+1);
+	ret = (char*)malloc(size + 1);
 	ret[size] = '\0';
-	ret = (char*)ft_memset(ret,c,size);
+	ret = (char*)ft_memset(ret, c, size);
 	return (ret);
 }
 
-char *fixneg(char *str)
+char	*fixneg(char *str)
 {
-	int i;
-	char temp;
+	int		i;
+	char	temp;
 
 	i = 0;
 	while (str[i])
 	{
-
 		if (str[i] == '-' && str[0] != ' ')
 		{
 			temp = str[0];
@@ -57,10 +69,10 @@ char *fixneg(char *str)
 		}
 		i++;
 	}
-	return str;
+	return (str);
 }
 
-char *betterjoin(char *first, char *second)
+char	*betterjoin(char *first, char *second)
 {
 	char *ret;
 

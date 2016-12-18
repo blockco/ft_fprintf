@@ -1,23 +1,23 @@
 #include "ft_printf.h"
 
-char *zeroflagextra(s_flags *tempflag, int size, char *buffer, char *save)
+char	*zeroflagextra(t_flags *tempflag, int size, char *buffer, char *save)
 {
 	if (tempflag->precision == 0)
 		buffer = makespace(size, '0');
 	else if (tempflag->precision > 0)
 		buffer = makespace(size, ' ');
-	return(betterjoin(buffer,save));
+	return (betterjoin(buffer, save));
 }
 
-char *zeroflag(char *str, char *temp, s_flags **flag)
+char	*zeroflag(char *str, char *temp, t_flags **flag)
 {
-	s_flags *tempflag;
-	tempflag = *flag;
-	int size;
-	char *buffer;
-	char *save;
-	buffer = "";
+	t_flags *tempflag;
+	int		size;
+	char	*buffer;
+	char	*save;
 
+	buffer = "";
+	tempflag = *flag;
 	if (tempflag->sign == -1 || tempflag->space == -1)
 		tempflag->zero--;
 	if (temp == NULL)
@@ -32,34 +32,36 @@ char *zeroflag(char *str, char *temp, s_flags **flag)
 		save = zeroflagextra(tempflag, size, buffer, save);
 	}
 	if (temp[0] == '-')
-		temp = betterjoin("-",save);
+		temp = betterjoin("-", save);
 	else
 		temp = ft_strdup(save);
 	return (temp);
 }
 
-char *hashflag(char *str, char *temp, s_flags **flag)
+char	*hashflag(char *str, char *temp, t_flags **flag)
 {
-	s_flags *tempflag;
+	t_flags *tempflag;
+
 	tempflag = *flag;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
-	if (ft_strcmp(temp,"0") == 0)
+	if (ft_strcmp(temp, "0") == 0)
 		temp = ft_strdup("0");
-	else if(tempflag->conid == 10 && (temp[0] != '0' || temp[1] != 'x'))
-		temp = betterjoin("0x",temp);
-	else if(tempflag->conid == 11 && (temp[0] != '0' || temp[1] != 'x'))
-		temp = betterjoin("0X",temp);
-	else if((tempflag->conid == 7 || tempflag->conid == 6) && temp[0] != '0')
-		temp = betterjoin("0",temp);
+	else if (tempflag->conid == 10 && (temp[0] != '0' || temp[1] != 'x'))
+		temp = betterjoin("0x", temp);
+	else if (tempflag->conid == 11 && (temp[0] != '0' || temp[1] != 'x'))
+		temp = betterjoin("0X", temp);
+	else if ((tempflag->conid == 7 || tempflag->conid == 6) && temp[0] != '0')
+		temp = betterjoin("0", temp);
 	return (temp);
 }
 
-char *extraflag(char *str, char *temp, s_flags **flag)
+char	*extraflag(char *str, char *temp, t_flags **flag)
 {
-	s_flags *tempflag;
+	t_flags	*tempflag;
+	char	*buffer;
+
 	tempflag = *flag;
-	char *buffer;
 	buffer = "";
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);

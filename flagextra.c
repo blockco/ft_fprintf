@@ -1,11 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flagextra.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 01:25:16 by rpassafa          #+#    #+#             */
+/*   Updated: 2016/12/17 01:25:37 by rpassafa         ###   ########.us       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int findprecisionextra(const char *format, int *findex)
+int		findprecisionextra(const char *format, int *findex)
 {
-	int i = 0;
+	int	i;
 	int temp;
+
+	i = 0;
 	temp = *findex;
-	while(format[temp] >= '0' && format[temp] <= '9')
+	while (format[temp] >= '0' && format[temp] <= '9')
 	{
 		if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
 		{
@@ -19,35 +33,37 @@ int findprecisionextra(const char *format, int *findex)
 	*findex = temp;
 	if (i == 0)
 		i = -1;
-	return i;
+	return (i);
 }
 
-void	setsymb(s_flags **flag, int *findex, const char *format)
+void	setsymb(t_flags **flag, int *findex, const char *format)
 {
-	int temp;
-	s_flags *tempflag;
+	int		temp;
+	t_flags *tempflag;
+
 	tempflag = *flag;
 	temp = *findex;
-		if (format[temp] == '#')
-			tempflag->hash = findhash(format, &temp);
-		else if (format[temp] == '0')
-			tempflag->zero = findprecision(format, &temp);
-		else if (format[temp] == '-')
-			tempflag->mflag = findprecision(format, &temp);
-		else if (format[temp] == '+')
-			tempflag->sign = findprecisionspace(format, &temp);
-		else if (format[temp] == ' ')
-			tempflag->space = findprecisionspace(format, &temp);
-		else if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
-			tempflag->extra = findprecisionspace(format, &temp);
+	if (format[temp] == '#')
+		tempflag->hash = findhash(format, &temp);
+	else if (format[temp] == '0')
+		tempflag->zero = findprecision(format, &temp);
+	else if (format[temp] == '-')
+		tempflag->mflag = findprecision(format, &temp);
+	else if (format[temp] == '+')
+		tempflag->sign = findprecisionspace(format, &temp);
+	else if (format[temp] == ' ')
+		tempflag->space = findprecisionspace(format, &temp);
+	else if (format[temp + 1] >= '0' && format[temp + 1] <= '9')
+		tempflag->extra = findprecisionspace(format, &temp);
 	*findex = temp;
 	*flag = tempflag;
 }
 
-void	findflags(s_flags **flag, int *findex, const char *format) //move
+void	findflags(t_flags **flag, int *findex, const char *format)
 {
-	int temp;
-	s_flags *tempflag;
+	int		temp;
+	t_flags *tempflag;
+
 	tempflag = *flag;
 	temp = *findex;
 	if ((format[temp] == 'l' && format[temp + 1] == 'l') ||

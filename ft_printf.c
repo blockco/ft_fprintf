@@ -6,131 +6,90 @@
 /*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 21:43:45 by rpassafa          #+#    #+#             */
-/*   Updated: 2016/12/16 22:54:17 by rpassafa         ###   ########.us       */
+/*   Updated: 2016/12/17 16:11:37 by rpassafa         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h> //testing use
+#include <stdio.h>
 
 char *g_format = "sSpdDioOuUxXcC";
 
-void (*g_gl[14])(va_list *ptr, s_flags **flag) =
+void	(*g_gl[14])(va_list *ptr, t_flags **flag) =
 {
-	&pf_putstr, 	//0			s
-	&pf_putstr, 	//1 		S
-	&pf_p_handle,	//2 		p
-	&pf_putnbr, 	//3			d
-	&pf_dup_handle, //4			D
-	&pf_putnbr, 	//5			i
-	&pf_o_handle, 	//6			o
-	&pf_oup_handle, //7			O
-	&pf_u_handle,	//8			u
-	&pf_uup_handle, //9			U
-	&pf_xlow_handle,//10		x
-	&pf_x_handle,	//11		X
-	&pf_putchar, 	//12		c
-	&pf_putchar, 	//13		C
+	&pf_putstr,
+	&pf_putstr,
+	&pf_p_handle,
+	&pf_putnbr,
+	&pf_dup_handle,
+	&pf_putnbr,
+	&pf_o_handle,
+	&pf_oup_handle,
+	&pf_u_handle,
+	&pf_uup_handle,
+	&pf_xlow_handle,
+	&pf_x_handle,
+	&pf_putchar,
+	&pf_putchar,
 };
 
-int findfunind(char c)
+int		findfunind(char c)
 {
 	int i;
 
 	i = 0;
 	while (g_format[i])
 	{
-		if(g_format[i] == c)
-			return i;
+		if (g_format[i] == c)
+			return (i);
 		i++;
 	}
-	return -1;
+	return (-1);
 }
 
+int		contin(char *format, int findex)
+{
+	if (format[findex] == '#' || format[findex] == '0'
+		|| format[findex] == '-' || format[findex] == '+' ||
+		format[findex] == ' ' ||
+		(format[findex] >= '0' && format[findex] <= '9') ||
+		format[findex] == '.' ||
+		(format[findex] == 'l' && format[findex + 1] == 'l') ||
+		(format[findex] == 'h' && format[findex + 1] == 'h') ||
+		format[findex] == 'h' || format[findex] == 'l' ||
+		format[findex] == 'j' || format[findex] == 'z')
+		return (1);
+	else
+		return (0);
+}
 
-char *charadder(char *str, char c)
+int		flagcontin(char *format, int findex)
+{
+	if (format[findex] == '#' || format[findex] == '0'
+	|| format[findex] == '-' || format[findex] == '+' ||
+	format[findex] == ' ')
+		return (1);
+	else
+		return (0);
+}
+
+int		morecontin(char *format, int findex)
+{
+	if ((format[findex] == 'l' && format[findex + 1] == 'l') ||
+	(format[findex] == 'h' && format[findex + 1] == 'h') ||
+	format[findex] == 'h' || format[findex] == 'l' ||
+	format[findex] == 'j' || format[findex] == 'z')
+		return (1);
+	else
+		return (0);
+}
+
+char	*charadder(char *str, char c)
 {
 	char *temp;
+
 	temp = (char*)malloc(2);
 	temp[0] = c;
 	temp[1] = '\0';
-	return(betterjoin(str,temp));
-}
-
-int ft_printf(const char *format, ...)
-{
-	int findex;
-	int size;
-	va_list args;
-	s_flags *flag;
-	flag = malloc(sizeof(s_flags));
-	findex = 0;
-	va_start(args,format);
-	setflags(&flag);
-	while (format[findex])
-	{
-		if (format[findex] == '%')
-		{
-			findex++;
-			while (format[findex] == '#' || format[findex] == '0'
-				|| format[findex] == '-' || format[findex] == '+' ||
-				format[findex] == ' ' ||
-				(format[findex] >= '0' && format[findex] <= '9') ||
-				format[findex] == '.' ||
-				(format[findex] == 'l' && format[findex + 1] == 'l') ||
-				(format[findex] == 'h' && format[findex + 1] == 'h') ||
-				format[findex] == 'h' || format[findex] == 'l' ||
-				format[findex] == 'j' || format[findex] == 'z')
-				{
-					if (format[findex] == '#' || format[findex] == '0'
-					|| format[findex] == '-' || format[findex] == '+' ||
-					format[findex] == ' ')
-					setsymb(&flag,&findex,format);
-					else if (format[findex] >= '0' && format[findex] <= '9')
-					flag->extra = findprecisionextra(format, &findex);
-					else if (format[findex] == '.')
-					flag->precision = findprecision(format, &findex);
-					else if ((format[findex] == 'l' && format[findex + 1] == 'l') ||
-					(format[findex] == 'h' && format[findex + 1] == 'h') ||
-					format[findex] == 'h' || format[findex] == 'l' ||
-					format[findex] == 'j' || format[findex] == 'z')
-					findflags(&flag, &findex, format);
-				}
-			flag->conid = findfunind(format[findex]);
-			if (format[findex] == '%')
-			{
-				flag->ret = percdealer(&flag);
-				findex++;
-			}
-			else if(flag->conid != -1)
-			{
-				g_gl[flag->conid](&args, &flag);
-				findex++;
-			}
-			ft_putstr(flag->ret);
-			flag->size = ft_strlen(flag->ret) + flag->size;
-		}
-		else
-		{
-			if (!checkoptions(&flag) && format[findex] == 'Z')
-				{
-					flag->ret = "";
-					flag->ret = charadder(flag->ret, format[findex]);
-					flag->ret = (char*)flagformatingstrings(flag->ret, &flag);
-					ft_putstr(flag->ret);
-					size = ft_strlen(flag->ret) + flag->size;
-					setflags(&flag);
-					flag->size = size;
-					findex++;
-				}
-				else
-				{
-					flag->size = flag->size + 1;
-					ft_putchar(format[findex]);
-					findex++;
-				}
-		}
-	}
-	va_end(args);
-	return flag->size;
+	return (betterjoin(str, temp));
 }

@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flagformating.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpassafa <rpassafa@student.42.us>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/12/17 01:30:55 by rpassafa          #+#    #+#             */
+/*   Updated: 2016/12/17 01:31:05 by rpassafa         ###   ########.us       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-char* percisionflag(char *str, char *temp, s_flags **flag)
+char	*percisionflag(char *str, char *temp, t_flags **flag)
 {
-	int size;
-	char *test;
-	s_flags *tempflag;
+	int		size;
+	char	*test;
+	t_flags *tempflag;
+
 	tempflag = *flag;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	if (tempflag->precision == -1)
-			return (temp);
+		return (temp);
 	if (tempflag->precision == -1 && ft_strcmp("0", temp) == 0)
-		return "";
+		return ("");
 	size = ft_strlen(temp);
 	if (temp[0] == '-')
 	{
@@ -19,34 +32,33 @@ char* percisionflag(char *str, char *temp, s_flags **flag)
 		size--;
 	}
 	else
-	{
 		test = ft_strsub((char const*)temp, 0, ft_strlen(temp));
-	}
 	temp = makespace((tempflag->precision - size), '0');
-	temp = betterjoin(temp,test);
+	temp = betterjoin(temp, test);
 	if (str[0] == '-')
-		temp = betterjoin("-",temp);
+		temp = betterjoin("-", temp);
 	return (temp);
 }
 
-char *mflag(char *str, char *temp, s_flags **flag)
+char	*mflag(char *str, char *temp, t_flags **flag)
 {
-	s_flags *tempflag;
+	t_flags	*tempflag;
+	int		size;
+	char	*buffer;
+
 	tempflag = *flag;
-	int size;
-	char *buffer;
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
 	size = tempflag->mflag - ft_strlen(temp);
 	if (size > 0)
 	{
 		buffer = makespace(size, ' ');
-		temp = betterjoin(temp,buffer);
+		temp = betterjoin(temp, buffer);
 	}
 	return (temp);
 }
 
-char* extendflagformat(s_flags *tempflag, char *temp, char *str)
+char	*extendflagformat(t_flags *tempflag, char *temp, char *str)
 {
 	if ((tempflag->precision > 0 || tempflag->precision == -1))
 		temp = percisionflag(str, temp, &tempflag);
@@ -61,21 +73,24 @@ char* extendflagformat(s_flags *tempflag, char *temp, char *str)
 	&& (tempflag->conid > -1))
 		temp = signflag(str, temp, &tempflag);
 	else if (((tempflag->space == -1) || (tempflag->space > 0))
-	&& (ft_strcmp(str,"%") != 0))
+	&& (ft_strcmp(str, "%") != 0))
 		temp = spaceflag(str, temp, &tempflag);
 	else if (tempflag->extra > 0)
 		temp = extraflag(str, temp, &tempflag);
 	if (temp == NULL)
 		temp = ft_strdup((const char*)str);
-	return temp;
+	return (temp);
 }
-char *flagformating(char *str, s_flags **flag)
+
+char	*flagformating(char *str, t_flags **flag)
 {
-	s_flags *tempflag;
+	t_flags *tempflag;
+	char	*temp;
+
 	tempflag = *flag;
-	char *temp = NULL;
+	temp = NULL;
 	if (tempflag->isnegative == 1 && tempflag->ret[0] != '-')
-		temp = betterjoin("-",tempflag->ret);
+		temp = betterjoin("-", tempflag->ret);
 	if (ft_atoi(str) == 0 && tempflag->precision == -1)
 	{
 		tempflag->precision = -2;
@@ -91,5 +106,5 @@ char *flagformating(char *str, s_flags **flag)
 			tempflag->mflag = tempflag->mflag - 2;
 	}
 	temp = extendflagformat(tempflag, temp, str);
-	return temp;
+	return (temp);
 }

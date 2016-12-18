@@ -8,12 +8,15 @@ uintmax_t		ft_pow(uintmax_t nb, int pow)
 		return (nb * ft_pow(nb, pow - 1));
 }
 
-char *ft_itoa_baselow(ssize_t value, intmax_t base)
+char	*ft_itoa_baselow(ssize_t value, intmax_t base)
 {
-	char hex[16] = "0123456789abcdef";
-	intmax_t n = value;
-	intmax_t size;
-	char *ret;
+	char		*hex;
+	intmax_t	n;
+	intmax_t	size;
+	char		*ret;
+
+	n = value;
+	hex = ft_strdup("0123456789abcdef");
 	if (value == 0)
 		return ("0");
 	if (value < 0)
@@ -23,14 +26,13 @@ char *ft_itoa_baselow(ssize_t value, intmax_t base)
 		size++;
 	ret = (char*)malloc(size + 1);
 	ret[size] = '\0';
-	size--;
 	while (n)
 	{
+		size--;
 		ret[size] = hex[n % base];
 		n = n / base;
-		size--;
 	}
 	if (value < 0 && base == 10)
 		ret[0] = '-';
-	return ret;
+	return (ret);
 }
