@@ -23,6 +23,8 @@ SRCS =	ft_printf.c \
 		flagextra.c \
 		pf_extramore.c \
 		pf_funmore.c \
+		extraprintf.c \
+		last.c \
 
 
 SRCSL =	libft/ft_putchar.c \
@@ -77,12 +79,6 @@ SRCSL =	libft/ft_putchar.c \
 		libft/ft_putstr_fd.c \
 		libft/ft_putendl_fd.c \
 		libft/ft_putnbr_fd.c \
-		libft/ft_lstnew.c \
-		libft/ft_lstdelone.c \
-		libft/ft_lstdel.c \
-		libft/ft_lstadd.c \
-		libft/ft_lstiter.c \
-		libft/ft_lstmap.c \
 
 RMOBJ = ft_putchar.o \
 		ft_putstr.o \
@@ -136,12 +132,6 @@ RMOBJ = ft_putchar.o \
 		ft_putstr_fd.o \
 		ft_putendl_fd.o \
 		ft_putnbr_fd.o \
-		ft_lstnew.o \
-		ft_lstdelone.o \
-		ft_lstdel.o \
-		ft_lstadd.o \
-		ft_lstiter.o \
-		ft_lstmap.o \
 
 OBJL1 =			libft/ft_putchar.o \
 				libft/ft_putstr.o \
@@ -195,12 +185,6 @@ OBJL1 =			libft/ft_putchar.o \
 				libft/ft_putstr_fd.o \
 				libft/ft_putendl_fd.o \
 				libft/ft_putnbr_fd.o \
-				libft/ft_lstnew.o \
-				libft/ft_lstdelone.o \
-				libft/ft_lstdel.o \
-				libft/ft_lstadd.o \
-				libft/ft_lstiter.o \
-				libft/ft_lstmap.o \
 
 OBJS =	$(SRCS:.c=.o)
 OBJSL = $(SRCSL:.c=.o)
